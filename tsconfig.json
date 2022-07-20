@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "target": "es6",
+    "outDir": "dist",
+    "allowJs": true,
+    "sourceMap": false,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": [
+      "node",
+      "jasmine"
+    ]
+  },
+  "include": [
+    "src/**/*",
+  ]
+}
