@@ -9,6 +9,8 @@
 
 export const FIBONACCI_CACHE: { [key: number]: number } = {};
 
+// O(n) space
+// O(2^n) runtime
 export const fibonacciRecursive = (n: number): number => {
   if (n < 2) {
     return n;
@@ -17,6 +19,8 @@ export const fibonacciRecursive = (n: number): number => {
   return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
 };
 
+// O(1) space
+// O(n) runtime
 export const fibonacciIterative = (n: number): number => {
   let nMinus1 = 0;
   let nMinus2 = 1;
@@ -28,6 +32,8 @@ export const fibonacciIterative = (n: number): number => {
   return nMinus1;
 };
 
+// O(n) space
+// O(2^n) -> O(n) runtime
 export const fibonacciRecursiveMemoized = (n: number): number => {
   if (FIBONACCI_CACHE[n] !== undefined) {
     return FIBONACCI_CACHE[n];
