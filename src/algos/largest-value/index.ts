@@ -1,7 +1,7 @@
 type ExpectedReturn = number | undefined;
 
 // O(n)
-export const largestValueSimple = (arr: number[]): ExpectedReturn => {
+export const largestValueBuiltin = (arr: number[]): ExpectedReturn => {
   if (arr.length === 0) {
     return undefined;
   }

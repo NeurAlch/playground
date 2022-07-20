@@ -1,4 +1,4 @@
-import { largestValueCompare, largestValueLoop, largestValueSimple } from '../../../algos/largest-value';
+import { largestValueCompare, largestValueLoop, largestValueBuiltin } from '../../../algos/largest-value';
 
 const ONE_VALUE = [1];
 const ZERO_VALUE = [0];
@@ -10,17 +10,17 @@ const SAME_NUMBERS = [1, 1, 1, 1, 1];
 const SORTED_REVERSE = [5, 4, 3, 2, 1];
 const SORTED = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-describe('largestValueSimple', () => {
+describe('largestValueBuiltin', () => {
   it('returns the largest value', () => {
-    expect(largestValueSimple(SORTED)).toBe(9);
-    expect(largestValueSimple(ONE_VALUE)).toBe(1);
-    expect(largestValueSimple(ZERO_VALUE)).toBe(0);
-    expect(largestValueSimple(SAME_NUMBERS)).toBe(1);
-    expect(largestValueSimple(EMPTY)).toBe(undefined);
-    expect(largestValueSimple(ONLY_POSITIVE)).toBe(3);
-    expect(largestValueSimple(WITH_NEGATIVE)).toBe(6);
-    expect(largestValueSimple(SORTED_REVERSE)).toBe(5);
-    expect(largestValueSimple(ONE_VALUE_NEGATIVE)).toBe(-5);
+    expect(largestValueBuiltin(SORTED)).toBe(9);
+    expect(largestValueBuiltin(ONE_VALUE)).toBe(1);
+    expect(largestValueBuiltin(ZERO_VALUE)).toBe(0);
+    expect(largestValueBuiltin(SAME_NUMBERS)).toBe(1);
+    expect(largestValueBuiltin(EMPTY)).toBe(undefined);
+    expect(largestValueBuiltin(ONLY_POSITIVE)).toBe(3);
+    expect(largestValueBuiltin(WITH_NEGATIVE)).toBe(6);
+    expect(largestValueBuiltin(SORTED_REVERSE)).toBe(5);
+    expect(largestValueBuiltin(ONE_VALUE_NEGATIVE)).toBe(-5);
   });
 });
 
