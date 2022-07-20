@@ -1,11 +1,7 @@
-module.exports = function (w) {
+module.exports = function () {
   return {
-    files: [
-      'src/**/*.ts',
-    ],
-    tests: [
-      'src/tests/unit-tests/**/*.test.ts',
-    ],
+    files: ['src/**/*.ts', '!src/tests/**/*.test.ts'],
+    tests: ['src/tests/unit-tests/**/*.test.ts'],
     env: {
       type: 'node',
     },
