@@ -250,9 +250,6 @@ dist
 ### OTHERWISE
 .vscode/
 .parcel-cache/
-.cache/
-dist/
-build/
 *.iml
 tmp/
 .idea

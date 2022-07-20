@@ -1,11 +1,7 @@
 module.exports = function (w) {
   return {
     files: [
-      'src/tasks/**/*.ts',
-      'src/server/**/*.ts',
-      'src/shared/**/*.ts',
-      'src/client/views/**/*.ts',
-      'src/client/components/**/*.ts',
+      'src/**/*.ts',
     ],
     tests: [
       'src/tests/unit-tests/**/*.test.ts',
