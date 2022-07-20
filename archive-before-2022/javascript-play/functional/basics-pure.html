@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>From Scratch | Pure</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <br/>
+                <a href="index.html">Back</a>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <h1>From Scratch</h1>
+                <p>Pure functions.</p>
+                <p><small>Check <a href="test/F-pure.js">test/F-pure.js</a></small></p>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h4>Pure</h4>
+                <p>
+                    A pure function is one that given the same input, will always return the same output,
+                    without observable side effect.
+                    <br/>
+                    This means that you can replace a pure function with the returned value without causing problems.
+                    This is known as <code>referential transparency</code>.
+                    <br/>
+                    <code>slice</code> is a pure function because it returns the same output per input every time,
+                    <code>splice</code> is not pure because it returns a different value.
+                    <br/>
+                    A pure function does not depend on any external state.
+                    <br/>
+                    Pure functions allow interesting things like easier testing, parallelization, memoization
+                    and laziness. Also pure functions tend to be self-documented and simpler.
+                </p>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h4>Side Effects</h4>
+                <p>
+                    A function or expression is said to have a side effect, in addition to returning a value,
+                    if it also modifies some state or has an observable interaction with calling functions or the
+                    outside world.
+                    <br/>
+                    Temporal side effects, like <code>Sleep(500)</code> or the time an iteration takes to complete,
+                    are usually ignored when discussing side effects.
+                    <br/>
+                    Examples of side effects: changes on file system, inserting or updating a database record,
+                    http call, printing to screen, mutation...
+                    <br/>
+                    Side effects can be controlled with things like functors and monads.
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <script src="static/js/jquery-1.11.3.js"></script>
+    <script src="src/E.js"></script>
+    <script src="src/F.js"></script>
+    <script src="test/F-pure.js"></script>
+</body>
+</html>

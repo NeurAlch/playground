@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>From Scratch | Composition</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <br/>
+                <a href="index.html">Back</a>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <h1>From Scratch</h1>
+                <p>Playing with composition.</p>
+                <p><small>Check <a href="test/F-composition.js">test/F-composition.js</a></small></p>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h4>Associative</h4>
+                <p>
+                    Composition of functions is always associative.
+                    <br/>
+                    The identity function is both a left and a right identity for composition.
+                    <br/>
+                    Function composition can be used in correspondence with function iteration.
+                </p>
+                <pre>E.strictEqual(
+    F.compose(F.compose(inc, inc), inc)(1),
+    F.compose(inc, F.compose(inc, inc))(1)
+);</pre>
+            </div>
+
+        </div>
+    </div>
+    <script src="static/js/jquery-1.11.3.js"></script>
+    <script src="src/E.js"></script>
+    <script src="src/F.js"></script>
+    <script src="test/F-composition.js"></script>
+</body>
+</html>

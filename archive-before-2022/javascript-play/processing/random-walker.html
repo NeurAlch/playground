@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Random Walker</title>
+</head>
+<body>
+    <canvas id="graph"></canvas>
+    <script src="processing.js"></script>
+    <script>
+
+        'use strict';
+
+        function randomWalker(processing) {
+
+            var x = 0, y = 0, step_x = 0, step_y = 0;
+
+            function step() {
+                step_x = processing.random(-1, 1);
+                step_y = processing.random(-1, 1);
+                x += step_x;
+                y += step_y;
+            }
+
+            function display() {
+                processing.stroke(0);
+                processing.point(x, y);
+            }
+
+            processing.setup = function() {
+                processing.size(640, 360);
+                processing.background(255);
+                x = processing.width/2;
+                y = processing.height/2;
+            };
+
+            processing.draw = function() {
+                step();
+                display();
+            };
+
+        }
+
+        var canvas = document.getElementById("graph");
+        var p = new Processing(canvas, randomWalker);
+
+    </script>
+</body>
+</html>

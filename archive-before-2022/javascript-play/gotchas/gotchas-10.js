@@ -1,0 +1,11 @@
+var x = NaN;
+strictEqual(NaN === x, false, 'NaN is the only one that is unequal to itself');
+strictEqual(isNaN(NaN), true, 'NaN is NaN');
+strictEqual(isNaN("one"), true, 'non-empty string is NaN');
+strictEqual(isNaN(""), false, "Empty string is not NaN");
+strictEqual(isNaN({}), true, 'object is NaN');
+strictEqual(isNaN({one: 1}), true, 'object is NaN');
+strictEqual(isNaN(undefined), true, 'undefined is NaN');
+strictEqual(isNaN(null), false, '"null" is not NaN');
+strictEqual(isNaN([]), false, 'Empty list is not NaN');
+strictEqual(isNaN([1]), false, 'List is not NaN');

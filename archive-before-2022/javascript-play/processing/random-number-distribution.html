@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Random Number Distribution</title>
+</head>
+<body>
+    <canvas id="graph"></canvas>
+    <script src="processing.js"></script>
+    <script>
+
+        'use strict';
+
+        function randomNumberDistribution(processing) {
+
+            var count = [];
+            var size = 20;
+            var width = 0, height = 0;
+
+            processing.setup = function() {
+                processing.size(640, 360);
+                width = processing.width;
+                height = processing.height;
+                for(var i = 0; i < size; i++) {
+                    count[i] = 0;
+                }
+            };
+
+            processing.draw = function() {
+
+                var x,
+                    i = Math.round(processing.random(size));
+
+                count[i]++;
+
+                processing.background(255);
+                processing.stroke(0);
+                processing.fill(175);
+
+                var w = width/size;
+                for(x = 0; x < size; x++) {
+                    processing.rect(x * w, height - count[x], w-1, count[x]);
+                }
+
+            };
+
+        }
+
+        var canvas = document.getElementById("graph");
+        var p = new Processing(canvas, randomNumberDistribution);
+
+    </script>
+</body>
+</html>

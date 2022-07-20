@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>From Scratch | Basics</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <br/>
+                <a href="index.html">Back</a>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <h1>From Scratch</h1>
+                <p>Some basic ideas on functional programming.</p>
+                <p class="text-muted"><small>
+                    This file includes tests for F.js (functional library) and E.js (testing library).
+                    <br/>
+                    Console should be free of errors, see <code>test/F.js</code> for usage examples.
+                    <br/>
+                    This are toy libraries for me learning functional programming, don't expect nothing impressive!
+                    <br/>
+                    You can check
+                    <a href="http://ramdajs.com/">Ramda</a>,
+                    <a href="http://underscorejs.org">Underscore</a>
+                    and <a href="https://lodash.com">Lodash</a>.
+                </small></p>
+                <p><small>Check <a href="test/F.js">test/F.js</a> and <a href="src/F.js">src/F.js</a></small></p>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.identity</code></h5>
+                <p>Returns the parameter supplied.</p>
+                <p>Equation: <code>f(x) = x</code>.</p>
+                <pre>var one = F.identity(1);
+one === 1; // true</pre>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.curry</code></h5>
+                <p>
+                    Translate the evaluation of a function into evaluation of a sequence of functions,
+                    each with a single argument (by partial application).
+                </p>
+                <p>Equation: <code>f(x, y) translated into two function calls f(x)(y) or (f(x))(y)</code>.</p>
+                <pre>var add = R.curry(function(x, y) { return x + y; })
+var add1 = add(1);
+add1(1) === 2; // true</pre>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.map</code></h5>
+                <p>
+                    Higher-order function that applies the given function to each element of the list,
+                    returning a list of the results.
+                </p>
+                <pre>F.map(function(x) { return x + 1; }, [0, 1, 2]) // [1, 2, 3]</pre>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.transformer</code></h5>
+                <p>Wrap any reducing function for use on reduce.</code></p>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.reduce</code></h5>
+                <p>
+                    Higher-order function that returns a single item by iterating through the list and calling the
+                    iterator function with the accumulator and the current value from the list, and then passing
+                    the result to the next call.
+                </p>
+                <pre>F.reduce(function(x, y) { return x + y; }, 0, [1, 1, 1]) // 3</pre>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h5><code>F.filter</code></h5>
+                <p>
+                    Higher-order function that processes a list to produce a new list containing exactly the elements
+                    of the original list for which the predicate function returns true.
+                </p>
+                <pre>F.filter(function(x) { return x > 1; }, [3, 2, 1]) // [3, 2]</pre>
+            </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h4>More</h4>
+                <p>Other useful functions included:</p>
+                <ul>
+                    <li><code>F.add</code></li>
+                    <li><code>F.all</code></li>
+                    <li><code>F.any</code></li>
+                    <li><code>F.compose</code></li>
+                    <li><code>F.divide</code></li>
+                    <li><code>F.head</code></li>
+                    <li><code>F.length</code></li>
+                    <li><code>F.multiply</code></li>
+                    <li><code>F.nth</code></li>
+                    <li><code>F.tail</code></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <script src="static/js/jquery-1.11.3.js"></script>
+    <script src="src/E.js"></script>
+    <script src="src/F.js"></script>
+    <script src="test/E.js"></script>
+    <script src="test/F.js"></script>
+</body>
+</html>
