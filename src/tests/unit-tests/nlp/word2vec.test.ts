@@ -1,4 +1,29 @@
-import { dataShape, generateTrainingData, mapTokens, oneHotEncode, tokenize } from '../../../nlp/word2vec';
+import { tensor } from '@tensorflow/tfjs';
+import {
+  getText,
+  createNetwork,
+  getDataShape,
+  generateTrainingData,
+  mapTokens,
+  oneHotEncode,
+  tokenize,
+  train,
+  predict,
+  wordsFromPrediction,
+} from '../../../nlp/word2vec';
+
+let TEXT = '';
+
+beforeAll(() => {
+  TEXT = getText();
+  TEXT = TEXT.slice(0, 300);
+});
+
+describe('TEXT', () => {
+  it('should have text', () => {
+    expect(TEXT.length).toBeGreaterThanOrEqual(1);
+  });
+});
 
 describe('tokenize', () => {
   it('should tokenize a string', () => {
@@ -50,7 +75,7 @@ describe('generateTrainingData', () => {
     const { wordToId } = mapTokens(tokens);
     const { X, y } = generateTrainingData(tokens, wordToId, 2);
 
-    expect(X).toEqual([
+    expect(X.arraySync()).toEqual([
       [1, 0, 0, 0, 0, 0, 0, 0],
       [1, 0, 0, 0, 0, 0, 0, 0],
       [0, 1, 0, 0, 0, 0, 0, 0],
@@ -95,7 +120,7 @@ describe('generateTrainingData', () => {
       [0, 0, 0, 1, 0, 0, 0, 0],
     ]);
 
-    expect(y).toEqual([
+    expect(y.arraySync()).toEqual([
       [0, 1, 0, 0, 0, 0, 0, 0],
       [0, 0, 1, 0, 0, 0, 0, 0],
       [1, 0, 0, 0, 0, 0, 0, 0],
@@ -140,7 +165,33 @@ describe('generateTrainingData', () => {
       [0, 1, 0, 0, 0, 0, 0, 0],
     ]);
 
-    expect(dataShape(X)).toEqual([42, 8]);
-    expect(dataShape(y)).toEqual([42, 8]);
+    expect(getDataShape(X)).toEqual([42, 8]);
+    expect(getDataShape(y)).toEqual([42, 8]);
+  });
+});
+
+describe('createNetwork', () => {
+  it('should create a network with the right shape', () => {
+    const network = createNetwork(20, 10);
+    expect(getDataShape(network.embeddings)).toEqual([20, 10]);
+    expect(getDataShape(network.weights)).toEqual([10, 20]);
+  });
+});
+
+describe('predict', () => {
+  it('should predict the right output', () => {
+    const tokens = tokenize(TEXT);
+    const { wordToId, idToWord } = mapTokens(tokens);
+    const vocabSize = Object.keys(wordToId).length;
+    let model = createNetwork(vocabSize, 10);
+    const { X, y } = generateTrainingData(tokens, wordToId, 2);
+    const nIterations = 100;
+    const learningRate = 0.05;
+    model = train(model, X, y, learningRate, nIterations);
+    const learning = oneHotEncode(wordToId['language'], vocabSize);
+    const prediction = predict(model, tensor([learning]));
+    const words = wordsFromPrediction(prediction, idToWord);
+    expect(words).toContain('natural');
+    expect(words).toContain('processing');
   });
 });
