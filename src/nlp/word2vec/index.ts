@@ -1,7 +1,8 @@
 import { concat, range, uniq } from 'lodash';
-import { sum, matMul, softmax, Tensor2D, tensor, Tensor, randomNormal } from '@tensorflow/tfjs';
+import { sum, matMul, softmax, Tensor2D, tensor, Tensor, randomNormal, tensor1d } from '@tensorflow/tfjs';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { oneHot } from '@tensorflow/tfjs-node-gpu';
 
 type IdToWord = Record<number, string>;
 type WordToId = Record<string, number>;
@@ -9,15 +10,21 @@ type Network = { embeddings: Tensor2D; weights: Tensor2D };
 
 export const tokenize = (text: string): string[] => {
   const words = text.toLowerCase().split(/\s+/);
-  return words.map((word) => {
-    let w = word.trim();
-    w = w.replace(/\s+/g, ' ');
-    w = w.replace(/\.+/g, '.');
-    if (w.endsWith('.')) {
-      w = w.slice(0, -1);
-    }
-    return w.replace(/[^a-z\d-.']/g, '');
-  });
+  return words
+    .map((word) => {
+      let w = word.trim();
+      w = w.replace(/\s+/g, ' ');
+      w = w.replace(/\.+/g, '.');
+      w = w.replace(/-+/g, '-');
+      if (w.endsWith('.')) {
+        w = w.slice(0, -1);
+      }
+      if (w.replace(/[^a-z\d]/g, '').length < 1) {
+        return '';
+      }
+      return w.replace(/[^a-z\d-.']/g, '');
+    })
+    .filter((word) => word.length > 0);
 };
 
 export const mapTokens = (tokens: string[]): { idToWord: IdToWord; wordToId: WordToId } => {
@@ -31,15 +38,7 @@ export const mapTokens = (tokens: string[]): { idToWord: IdToWord; wordToId: Wor
   return { idToWord, wordToId };
 };
 
-export const oneHotEncode = (id: number, vocabSize: number): number[] => {
-  const oneHot: number[] = Array(vocabSize).fill(0);
-  if (id < vocabSize) {
-    oneHot[id] = 1;
-  }
-  return oneHot;
-};
-
-export const generateTrainingData = (tokens: string[], wordToId: WordToId, window: number): { X: Tensor2D; y: Tensor2D } => {
+export const generateTrainingData = (tokens: string[], wordToId: WordToId, window: number): { X: number[][]; y: number[][] } => {
   const X: number[][] = [];
   const y: number[][] = [];
   const vocabSize = Object.keys(wordToId).length;
@@ -50,12 +49,14 @@ export const generateTrainingData = (tokens: string[], wordToId: WordToId, windo
       if (j === i) {
         continue;
       }
-      X.push(oneHotEncode(wordToId[tokens[i]], vocabSize));
-      y.push(oneHotEncode(wordToId[tokens[j]], vocabSize));
+      const X0 = oneHot(tensor1d([wordToId[tokens[i]]], 'int32'), vocabSize).arraySync() as number[][];
+      const y0 = oneHot(tensor1d([wordToId[tokens[j]]], 'int32'), vocabSize).arraySync() as number[][];
+      X.push(X0[0]);
+      y.push(y0[0]);
     }
   }
 
-  return { X: tensor(X), y: tensor(y) };
+  return { X, y };
 };
 
 export const getDataShape = (arr: Tensor2D): [number, number] => {
@@ -94,9 +95,11 @@ export const backward = (network: Network, X: Tensor, y: Tensor, alpha: number):
   return crossEntropy(z, y);
 };
 
-export const train = (network: Network, X: Tensor, y: Tensor, alpha: number, epochs: number): Network => {
+export const train = (network: Network, X: number[][], y: number[][], alpha: number, epochs: number): Network => {
+  const XTensor = tensor(X);
+  const yTensor = tensor(y);
   for (let i = 0; i < epochs; i++) {
-    const loss = backward(network, X, y, alpha);
+    const loss = backward(network, XTensor, yTensor, alpha);
     if (i % 50 === 0) {
       console.log(`Epoch ${i + 1}: ${loss.dataSync()[0]}`);
     }
@@ -113,13 +116,13 @@ export const wordsFromPrediction = (prediction: Tensor, idToWord: IdToWord): str
   const words: string[] = [];
   const predictions = prediction.arraySync() as number[][];
   for (let i = 0; i < predictions[0].length; i++) {
-    if (predictions[0][i] > 0.15) {
+    if (predictions[0][i] > 0.01) {
       words.push(idToWord[i]);
     }
   }
   return words;
 };
 
-export const getText = () => {
-  return readFileSync(join(__dirname, '../../data/', 'word2vec.txt')).toString();
+export const getText = (filename: string, maxSize: number) => {
+  return readFileSync(join(__dirname, '../../data/', filename)).toString().slice(0, maxSize);
 };

@@ -1,33 +1,34 @@
-import { tensor } from '@tensorflow/tfjs';
 import {
   getText,
   createNetwork,
   getDataShape,
   generateTrainingData,
   mapTokens,
-  oneHotEncode,
   tokenize,
   train,
   predict,
   wordsFromPrediction,
 } from '../../../nlp/word2vec';
+import { oneHot } from '@tensorflow/tfjs-node-gpu';
 
-let TEXT = '';
-
+let TEXT_W2V = '';
+let TEXT_WIKI = '';
 beforeAll(() => {
-  TEXT = getText();
-  TEXT = TEXT.slice(0, 300);
+  TEXT_W2V = getText('word2vec.txt', 1000);
+  TEXT_WIKI = getText('wiki.txt', 1000);
 });
 
 describe('TEXT', () => {
   it('should have text', () => {
-    expect(TEXT.length).toBeGreaterThanOrEqual(1);
+    expect(TEXT_W2V.length).toBeGreaterThanOrEqual(1);
+    expect(TEXT_WIKI.length).toBeGreaterThanOrEqual(1);
   });
 });
 
 describe('tokenize', () => {
   it('should tokenize a string', () => {
     expect(tokenize('Hello World!')).toEqual(['hello', 'world']);
+    expect(tokenize('---- a.')).toEqual(['a']);
     expect(tokenize('This is the 1.5x time they made the win!')).toEqual([
       'this',
       'is',
@@ -61,112 +62,20 @@ describe('mapTokens', () => {
   });
 });
 
-describe('oneHotEncode', () => {
-  it('should encode a list of tokens', () => {
-    expect(oneHotEncode(0, 5)).toEqual([1, 0, 0, 0, 0]);
-    expect(oneHotEncode(1, 5)).toEqual([0, 1, 0, 0, 0]);
-    expect(oneHotEncode(6, 5)).toEqual([0, 0, 0, 0, 0]);
-  });
-});
-
 describe('generateTrainingData', () => {
   it('should generate training data', () => {
     const tokens = tokenize('This is an amazing thing. I really like this thing, is amazing.');
     const { wordToId } = mapTokens(tokens);
     const { X, y } = generateTrainingData(tokens, wordToId, 2);
 
-    expect(X.arraySync()).toEqual([
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-    ]);
+    const X0 = X[0];
+    const y0 = y[0];
 
-    expect(y.arraySync()).toEqual([
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 1, 0, 0, 0, 0, 0, 0],
-    ]);
+    expect(X0).toEqual([1, 0, 0, 0, 0, 0, 0, 0]);
+    expect(y0).toEqual([0, 1, 0, 0, 0, 0, 0, 0]);
 
-    expect(getDataShape(X)).toEqual([42, 8]);
-    expect(getDataShape(y)).toEqual([42, 8]);
+    expect([X.length, X0.length]).toEqual([42, 8]);
+    expect([y.length, y0.length]).toEqual([42, 8]);
   });
 });
 
@@ -179,19 +88,35 @@ describe('createNetwork', () => {
 });
 
 describe('predict', () => {
-  it('should predict the right output', () => {
-    const tokens = tokenize(TEXT);
+  it('should predict the right output for word2vec.txt', () => {
+    const nIterations = 50;
+    const learningRate = 0.025;
+    const tokens = tokenize(TEXT_W2V);
     const { wordToId, idToWord } = mapTokens(tokens);
     const vocabSize = Object.keys(wordToId).length;
     let model = createNetwork(vocabSize, 10);
     const { X, y } = generateTrainingData(tokens, wordToId, 2);
-    const nIterations = 100;
-    const learningRate = 0.05;
     model = train(model, X, y, learningRate, nIterations);
-    const learning = oneHotEncode(wordToId['language'], vocabSize);
-    const prediction = predict(model, tensor([learning]));
+    const learning = oneHot([wordToId['language']], vocabSize);
+    const prediction = predict(model, learning);
     const words = wordsFromPrediction(prediction, idToWord);
-    expect(words).toContain('natural');
     expect(words).toContain('processing');
+    expect(words).toContain('natural');
+  });
+
+  it('should predict the right output for wiki.txt', () => {
+    const nIterations = 50;
+    const learningRate = 0.015;
+    const tokens = tokenize(TEXT_WIKI);
+    const { wordToId, idToWord } = mapTokens(tokens);
+    const vocabSize = Object.keys(wordToId).length;
+    let model = createNetwork(vocabSize, 10);
+    const { X, y } = generateTrainingData(tokens, wordToId, 2);
+    model = train(model, X, y, learningRate, nIterations);
+    const learning = oneHot([wordToId['pest']], vocabSize);
+    const prediction = predict(model, learning);
+    const words = wordsFromPrediction(prediction, idToWord);
+    expect(words).toContain('maize');
+    expect(words).toContain('crop');
   });
 });
