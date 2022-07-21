@@ -253,3 +253,4 @@ dist
 *.iml
 tmp/
 .idea
+src/data/raw
