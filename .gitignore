@@ -247,10 +247,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-### OTHERWISE
+# OTHER
 .vscode/
 .parcel-cache/
 *.iml
 tmp/
 .idea
 src/data/raw
+venv
