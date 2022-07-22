@@ -5,12 +5,12 @@ import tqdm
 import nltk
 import psutil
 import logging
-import keras_nlp
 import numpy as np
 import tensorflow as tf
 from typing import List
 from nltk.corpus import stopwords
 from hurry.filesize import size as filesize
+from gensim.models.phrases import Phrases, ENGLISH_CONNECTOR_WORDS
 
 nltk.download('stopwords', quiet=True)
 nltk.download('punkt', quiet=True)
@@ -18,12 +18,16 @@ nltk.download('punkt', quiet=True)
 SEED = 42
 EPOCHS = 50
 WINDOW_SIZE = 3
-VOCAB_SIZE = 500
+VOCAB_SIZE = 5_000
 NEGATIVE_SAMPLES = 5
 SENTENCE_LENGTH = 10
-BATCH_SIZE = 1024
-BUFFER_SIZE = 10000
-EMBEDDING_DIM = 300
+BATCH_SIZE = 1_024
+BUFFER_SIZE = 5_000
+EMBEDDING_DIM = 100
+BI_MIN_COUNT = 10
+BI_THRESHOLD = 0.8
+TRI_MIN_COUNT = 5
+TRI_THRESHOLD = 0.8
 AUTOTUNE = tf.data.AUTOTUNE
 STOP_WORDS = set(stopwords.words('english'))
 
@@ -32,35 +36,6 @@ def get_process_memory() -> str:
     process = psutil.Process(os.getpid())
     mem_info = process.memory_info()
     return filesize(mem_info.rss)
-
-
-class Tokenizer(keras_nlp.tokenizers.Tokenizer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.tokens = set()
-        self.tokens_to_ids = {}
-        self.ids_to_tokens = {}
-
-    def get_vocabulary(self) -> List[str]:
-        return list(self.tokens)
-
-    def tokenize(self, inputs, *args, **kwargs) -> List[str]:
-        _tokens = tokenize(inputs)
-        self._add_tokens_to_vocabulary([token for token in _tokens if token])
-        return _tokens
-
-    def token_to_id(self, token: str) -> int:
-        return self.tokens_to_ids[token]
-
-    def id_to_token(self, _id: int) -> str:
-        return self.ids_to_tokens[_id]
-
-    def _add_tokens_to_vocabulary(self, tokens):
-        self.tokens.update(tokens)
-
-    def update_token_ids(self):
-        self.tokens_to_ids = {token: _id for _id, token in enumerate(self.tokens)}
-        self.ids_to_tokens = {_id: token for _id, token in enumerate(self.tokens)}
 
 
 def tokenize(sentence: str) -> list[str]:
@@ -152,7 +127,7 @@ def find_closest(word, vectors, vocab, top_n):
 
     for index, vector in enumerate(vectors):
         similarity = tf.losses.CosineSimilarity()(query_vector, vector)
-        if not np.array_equal(vector, query_vector) and similarity < min_dist:
+        if not np.array_equal(vector, query_vector) and similarity <= min_dist:
             min_dist = similarity
             if vocab[index] and vocab[index] != '[UNK]':
                 top_index_dist.append([index, min_dist])
@@ -165,18 +140,22 @@ def find_closest(word, vectors, vocab, top_n):
 def main():
     corpus = open('src/data/shakespeare.txt', 'r').read()
     sentences = nltk.sent_tokenize(corpus.lower())
-    sentences = [tokenize(sentence) for sentence in sentences if len(sentence) > 2]
+    sentences_words = [tokenize(sentence) for sentence in sentences if len(sentence.split(' ')) > 1]
+
+    bigrams = Phrases(sentences_words, min_count=BI_MIN_COUNT, threshold=BI_THRESHOLD, connector_words=ENGLISH_CONNECTOR_WORDS)
+    trigrams = Phrases(bigrams[sentences_words], min_count=TRI_MIN_COUNT, threshold=TRI_THRESHOLD, connector_words=ENGLISH_CONNECTOR_WORDS)
 
     logging.debug('Sample text: {}...'.format(corpus[:30].replace('\n', ' ')))
     logging.debug('Total sentences {:,}, sample sentences {}'.format(len(sentences), sentences[:2]))
+    logging.debug('Sample sentences with trigrams {}'.format(trigrams[sentences_words[3]]))
     logging.debug(f'Memory usage: {get_process_memory()}')
 
-    corpus_file = '/tmp/wiki-clean.txt'
+    corpus_file = '/tmp/shakespeare-clean.txt'
     with open(corpus_file, 'w') as f:
-        for line in sentences:
-            f.write(' '.join(line) + '\n')
+        for line in sentences_words:
+            f.write(' '.join(trigrams[line]) + '\n')
 
-    text_ds = tf.data.TextLineDataset(corpus_file).filter(lambda x: tf.cast(tf.strings.length(x), bool))
+    text_ds = tf.data.TextLineDataset(corpus_file)
 
     vectorize_layer = tf.keras.layers.TextVectorization(
         max_tokens=VOCAB_SIZE,
@@ -184,12 +163,9 @@ def main():
         output_sequence_length=SENTENCE_LENGTH,
     )
 
-    vectorize_layer.adapt(text_ds.batch(1024))
-    text_vector_ds = text_ds.batch(1024).prefetch(AUTOTUNE).map(vectorize_layer).unbatch()
+    vectorize_layer.adapt(text_ds.batch(BATCH_SIZE))
+    text_vector_ds = text_ds.batch(BATCH_SIZE).prefetch(AUTOTUNE).map(vectorize_layer).unbatch()
     sequences = list(text_vector_ds.as_numpy_iterator())
-
-    logging.debug(f'Memory usage: {get_process_memory()}')
-
     targets, contexts, labels = training_data(sequences=sequences, vocab_size=VOCAB_SIZE)
 
     targets = np.array(targets)
