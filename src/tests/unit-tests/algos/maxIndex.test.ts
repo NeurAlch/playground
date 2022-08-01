@@ -1,4 +1,4 @@
-import { maxIndex } from '../../../algos/maxIndex/maxIndex';
+import { maxIndex } from '../../../algos/maxIndex';
 
 describe('max', () => {
   it('should return -1 if empty', () => {

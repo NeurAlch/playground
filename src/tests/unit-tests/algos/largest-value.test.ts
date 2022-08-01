@@ -1,4 +1,4 @@
-import { largestValueCompare, largestValueLoop, largestValueBuiltin } from '../../../algos/largest-value';
+import { largestValueCompare, largestValueLoop, largestValueBuiltin } from '../../../algos/largest-Value';
 
 const ONE_VALUE = [1];
 const ZERO_VALUE = [0];
