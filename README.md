@@ -25,7 +25,7 @@ Examples:
   * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
   * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
-  * Double Linked List (_pending_)
+  * [Double Linked List](./src/tests/unit-tests/data-structures/double-linked-list.test.ts)
   * Queue using Double Linked List (_pending_)
 * Design Patterns
 * Machine Learning
