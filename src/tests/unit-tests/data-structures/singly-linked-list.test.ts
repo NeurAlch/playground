@@ -6,12 +6,20 @@ describe('SinglyLinkedList', () => {
     expect(sll).toBeTruthy();
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
+    expect(sll.head).toBe(undefined);
+    expect(sll.tail).toBe(undefined);
   });
 
   it('SLL.push() should add a node to the end of the list', () => {
     const sll = new SinglyLinkedList();
+    expect(sll.length).toBe(0);
+    expect(sll.toArray()).toEqual([]);
     sll.push(1);
+    expect(sll.length).toBe(1);
+    expect(sll.toArray()).toEqual([1]);
     sll.push(2);
+    expect(sll.length).toBe(2);
+    expect(sll.toArray()).toEqual([1, 2]);
     sll.push(3);
     expect(sll.length).toBe(3);
     expect(sll.toArray()).toEqual([1, 2, 3]);
@@ -40,43 +48,62 @@ describe('SinglyLinkedList', () => {
 
   it('SLL.removeAt() should remove the node at the given index', () => {
     const sll = new SinglyLinkedList();
+    expect(sll.removeAt(0)).toBe(undefined);
+    expect(sll.length).toBe(0);
+    expect(sll.toArray()).toEqual([]);
+
     sll.push(1);
     sll.push(2);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(2);
     expect(sll.removeAt(1)).toBe(2);
     expect(sll.length).toBe(1);
     expect(sll.toArray()).toEqual([1]);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(1);
 
     // removing the head leaves an empty list
     expect(sll.removeAt(0)).toBe(1);
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
+    expect(sll.head).toBe(undefined);
+    expect(sll.tail).toBe(undefined);
 
     // remove in the middle
     sll.push(1);
     sll.push(2);
     sll.push(3);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(3);
     expect(sll.removeAt(1)).toBe(2);
     expect(sll.length).toBe(2);
     expect(sll.toArray()).toEqual([1, 3]);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(3);
 
     // remove with negative index
     expect(sll.removeAt(-1)).toBe(3);
     expect(sll.length).toBe(1);
     expect(sll.toArray()).toEqual([1]);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(1);
 
     // index greater than length returns undefined
     expect(sll.removeAt(10)).toBe(undefined);
     expect(sll.length).toBe(1);
     expect(sll.toArray()).toEqual([1]);
+    expect(sll.head).toBe(1);
+    expect(sll.tail).toBe(1);
   });
 
   it('SLL.peak() should return the value of the last node', () => {
     const sll = new SinglyLinkedList();
     sll.push(1);
     sll.push(2);
-    expect(sll.peak()).toBe(2);
+    sll.push(3);
+    expect(sll.peak()).toBe(3);
     sll.pop();
-    expect(sll.peak()).toBe(1);
+    sll.pop();
     sll.pop();
     expect(sll.peak()).toBe(undefined);
   });
@@ -100,26 +127,28 @@ describe('SinglyLinkedList', () => {
     const sll = new SinglyLinkedList();
     sll.push(1);
     sll.push(3);
+    expect(sll.toArray()).toEqual([1, 3]);
     sll.insertAt(1, 2);
     expect(sll.length).toBe(3);
     expect(sll.toArray()).toEqual([1, 2, 3]);
     sll.insertAt(0, 0);
     expect(sll.length).toBe(4);
     expect(sll.toArray()).toEqual([0, 1, 2, 3]);
-    sll.insertAt(4, 4);
-    expect(sll.length).toBe(5);
-    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4]);
-    sll.insertAt(sll.length, 6);
-    expect(sll.length).toBe(6);
-    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 6]);
-    sll.insertAt(-1, 5);
-    expect(sll.length).toBe(7);
-    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    expect(sll.head).toBe(0);
+    expect(sll.tail).toBe(3);
 
-    // index greater than length is a no-op
-    sll.insertAt(10, 1);
-    expect(sll.length).toBe(7);
-    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    // can't insert at index >= length
+    sll.insertAt(4, 4);
+    expect(sll.length).toBe(4);
+    expect(sll.toArray()).toEqual([0, 1, 2, 3]);
+    expect(sll.head).toBe(0);
+    expect(sll.tail).toBe(3);
+
+    sll.insertAt(sll.length - 1, 4);
+    expect(sll.length).toBe(5);
+    expect(sll.toArray()).toEqual([0, 1, 2, 4, 3]);
+    expect(sll.head).toBe(0);
+    expect(sll.tail).toBe(3);
   });
 
   it('SLL.indexOf() should return the index of the given value', () => {

@@ -5,6 +5,8 @@ interface SLLNode {
 
 interface SLL {
   length: number;
+  head: number | undefined;
+  tail: number | undefined;
 
   push(value: number): void;
   pop(): number | undefined;
@@ -19,7 +21,7 @@ interface SLL {
 
 export class SinglyLinkedList implements SLL {
   protected _length: number;
-  protected head: SLLNode | undefined;
+  protected _head: SLLNode | undefined;
 
   constructor() {
     this._length = 0;
@@ -29,7 +31,7 @@ export class SinglyLinkedList implements SLL {
     const node: SLLNode = { value };
     const [, currentNode] = this.pairAt(this.length - 1);
     if (currentNode === undefined) {
-      this.head = node;
+      this._head = node;
     } else {
       currentNode.next = node;
     }
@@ -37,7 +39,7 @@ export class SinglyLinkedList implements SLL {
   }
 
   pop(): number | undefined {
-    if (this.head === undefined) {
+    if (this._head === undefined) {
       return undefined;
     }
 
@@ -45,7 +47,7 @@ export class SinglyLinkedList implements SLL {
   }
 
   removeAt(_index: number): number | undefined {
-    if (!this.head) {
+    if (!this._head) {
       return undefined;
     }
 
@@ -57,7 +59,7 @@ export class SinglyLinkedList implements SLL {
     const [previousNode, currentNode] = this.pairAt(index);
 
     if (previousNode === undefined) {
-      this.head = undefined;
+      this._head = undefined;
     } else {
       previousNode.next = currentNode?.next;
     }
@@ -67,7 +69,7 @@ export class SinglyLinkedList implements SLL {
   }
 
   insertAt(_index: number, value: number): void {
-    if (!this.head) {
+    if (!this._head) {
       return;
     }
 
@@ -80,7 +82,7 @@ export class SinglyLinkedList implements SLL {
     const [previousNode, currentNode] = this.pairAt(index);
 
     if (previousNode === undefined) {
-      this.head = node;
+      this._head = node;
     } else {
       previousNode.next = node;
     }
@@ -92,7 +94,7 @@ export class SinglyLinkedList implements SLL {
   private pairAt(index: number): [SLLNode | undefined, SLLNode | undefined] {
     let i = 0;
     let previousNode: SLLNode | undefined;
-    let currentNode: SLLNode | undefined = this.head;
+    let currentNode: SLLNode | undefined = this._head;
     while (i < index) {
       previousNode = currentNode;
       currentNode = currentNode?.next;
@@ -104,7 +106,7 @@ export class SinglyLinkedList implements SLL {
   private getIndex(_index: number): number | undefined {
     let index = _index;
 
-    if (index > this._length) {
+    if (index >= this._length) {
       return undefined;
     }
 
@@ -125,7 +127,7 @@ export class SinglyLinkedList implements SLL {
     }
 
     let i = 0;
-    let currentNode: SLLNode | undefined = this.head;
+    let currentNode: SLLNode | undefined = this._head;
 
     while (i < index) {
       currentNode = currentNode?.next;
@@ -142,7 +144,7 @@ export class SinglyLinkedList implements SLL {
 
   toArray(): number[] {
     const array: number[] = [];
-    let currentNode = this.head;
+    let currentNode = this._head;
     while (currentNode !== undefined) {
       array.push(currentNode.value);
       currentNode = currentNode.next;
@@ -152,7 +154,7 @@ export class SinglyLinkedList implements SLL {
 
   indexOf(value: number): number {
     let i = 0;
-    let currentNode = this.head;
+    let currentNode = this._head;
     while (currentNode !== undefined) {
       if (currentNode.value === value) {
         return i;
@@ -169,11 +171,20 @@ export class SinglyLinkedList implements SLL {
   }
 
   *values(): IterableIterator<number> {
-    let currentNode = this.head;
+    let currentNode = this._head;
     while (currentNode !== undefined) {
       yield currentNode.value;
       currentNode = currentNode.next;
     }
+  }
+
+  get head(): number | undefined {
+    return this._head?.value;
+  }
+
+  get tail(): number | undefined {
+    const tail = this.nodeAt(this.length - 1);
+    return tail?.value;
   }
 
   get length(): number {
