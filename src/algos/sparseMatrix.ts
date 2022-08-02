@@ -1,3 +1,4 @@
+// This is a modified version of the original compressed sparse matrix implementation that uses a shape
 export interface CSR {
   col: number[];
   row: number[];
