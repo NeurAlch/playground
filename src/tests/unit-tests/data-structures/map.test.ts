@@ -52,3 +52,5 @@ describe('Map', () => {
     expect(entries1.next().value).toEqual(2);
   });
 });
+
+export {};

@@ -46,3 +46,5 @@ describe('Set', () => {
     expect(values.next().value).toEqual([2, 2]);
   });
 });
+
+export {};
