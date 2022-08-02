@@ -2,7 +2,7 @@ import { SinglyLinkedList } from '../../../data-structures/singly-linked-list';
 
 describe('SinglyLinkedList', () => {
   it('should create an instance', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     expect(sll).toBeTruthy();
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
@@ -11,7 +11,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.push() should add a node to the end of the list', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
     sll.push(1);
@@ -26,7 +26,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.pop() should remove the last node from the list', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(2);
     sll.push(3);
@@ -47,7 +47,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.removeAt() should remove the node at the given index', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     expect(sll.removeAt(0)).toBe(undefined);
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
@@ -97,7 +97,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.peak() should return the value of the last node', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(2);
     sll.push(3);
@@ -109,7 +109,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.at() should return the value of the node at the given index', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(2);
     sll.push(3);
@@ -124,7 +124,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.insertAt() should insert a node at the given index', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(3);
     expect(sll.toArray()).toEqual([1, 3]);
@@ -152,7 +152,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.indexOf() should return the index of the given value', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(2);
     sll.push(3);
@@ -163,7 +163,7 @@ describe('SinglyLinkedList', () => {
   });
 
   it('SLL.values() should return an iterator over the values of the list', () => {
-    const sll = new SinglyLinkedList();
+    const sll = new SinglyLinkedList<number>();
     sll.push(1);
     sll.push(2);
     sll.push(3);

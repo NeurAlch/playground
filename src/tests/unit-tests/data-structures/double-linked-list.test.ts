@@ -2,14 +2,14 @@ import { DoubleLinkedList } from '../../../data-structures/double-linked-list';
 
 describe('DoubleLinkedList', () => {
   it('should create an instance', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     expect(dll).toBeTruthy();
     expect(dll.length).toBe(0);
     expect(dll.toArray()).toEqual([]);
   });
 
   it('DLL.push() should add a node to the end of the list', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     expect(dll.length).toBe(0);
     expect(dll.toArray()).toEqual([]);
     dll.push(1);
@@ -24,7 +24,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.pop() should remove the last node from the list', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(2);
     dll.push(3);
@@ -45,7 +45,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.removeAt() should remove the node at the given index', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     expect(dll.removeAt(0)).toBe(undefined);
     expect(dll.length).toBe(0);
     expect(dll.toArray()).toEqual([]);
@@ -95,7 +95,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.peak() should return the value of the last node', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(2);
     dll.push(3);
@@ -107,7 +107,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.at() should return the value of the node at the given index', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(2);
     dll.push(3);
@@ -121,7 +121,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.insertAt() should insert a node at the given index', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(3);
     expect(dll.toArray()).toEqual([1, 3]);
@@ -149,7 +149,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.indexOf() should return the index of the given value', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(2);
     dll.push(3);
@@ -160,7 +160,7 @@ describe('DoubleLinkedList', () => {
   });
 
   it('DLL.values() should return an iterator over the values of the list', () => {
-    const dll = new DoubleLinkedList();
+    const dll = new DoubleLinkedList<number>();
     dll.push(1);
     dll.push(2);
     dll.push(3);

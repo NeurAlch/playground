@@ -1,36 +1,36 @@
-interface DLLNode {
-  value: number;
-  next?: DLLNode;
-  prev?: DLLNode;
+interface DLLNode<VType> {
+  value: VType;
+  next?: DLLNode<VType>;
+  prev?: DLLNode<VType>;
 }
 
-interface DLL {
+interface DLL<VType> {
   length: number;
-  head: number | undefined;
-  tail: number | undefined;
+  head: VType | undefined;
+  tail: VType | undefined;
 
-  push(value: number): void;
-  pop(): number | undefined;
-  insertAt(value: number, index: number): void;
-  removeAt(index: number): number | undefined;
-  peak(): number | undefined;
-  at(index: number): number | undefined;
-  toArray(): number[];
-  indexOf(value: number): number;
-  values(): IterableIterator<number>;
+  push(value: VType): void;
+  pop(): VType | undefined;
+  insertAt(index: number, value: VType): void;
+  removeAt(index: number): VType | undefined;
+  peak(): VType | undefined;
+  at(index: number): VType | undefined;
+  toArray(): VType[];
+  indexOf(value: VType): number;
+  values(): IterableIterator<VType>;
 }
 
-export class DoubleLinkedList implements DLL {
+export class DoubleLinkedList<VType> implements DLL<VType> {
   protected _length: number;
-  protected _head: DLLNode | undefined;
-  protected _tail: DLLNode | undefined;
+  protected _head: DLLNode<VType> | undefined;
+  protected _tail: DLLNode<VType> | undefined;
 
   constructor() {
     this._length = 0;
   }
 
-  push(value: number): void {
-    const node: DLLNode = { value };
+  push(value: VType): void {
+    const node: DLLNode<VType> = { value };
 
     if (this._head === undefined || this._tail === undefined) {
       this._head = node;
@@ -44,7 +44,7 @@ export class DoubleLinkedList implements DLL {
     this._length++;
   }
 
-  pop(): number | undefined {
+  pop(): VType | undefined {
     if (this._head === undefined || this._tail === undefined) {
       return undefined;
     }
@@ -61,14 +61,14 @@ export class DoubleLinkedList implements DLL {
     return node.value;
   }
 
-  private nodeAt(_index: number): DLLNode | undefined {
+  private nodeAt(_index: number): DLLNode<VType> | undefined {
     const index = this.getIndex(_index);
     if (index === undefined) {
       return undefined;
     }
 
     let i = 0;
-    let currentNode: DLLNode | undefined = this._head;
+    let currentNode: DLLNode<VType> | undefined = this._head;
 
     while (i < index) {
       currentNode = currentNode?.next;
@@ -95,12 +95,12 @@ export class DoubleLinkedList implements DLL {
     return index;
   }
 
-  at(index: number): number | undefined {
+  at(index: number): VType | undefined {
     const currentNode = this.nodeAt(index);
     return currentNode?.value;
   }
 
-  insertAt(_index: number, value: number): void {
+  insertAt(_index: number, value: VType): void {
     if (!this._head) {
       return;
     }
@@ -110,9 +110,9 @@ export class DoubleLinkedList implements DLL {
       return;
     }
 
-    const node: DLLNode = { value };
-    const currentNode: DLLNode | undefined = this.nodeAt(index);
-    const previousNode: DLLNode | undefined = currentNode?.prev;
+    const node: DLLNode<VType> = { value };
+    const currentNode: DLLNode<VType> | undefined = this.nodeAt(index);
+    const previousNode: DLLNode<VType> | undefined = currentNode?.prev;
 
     if (previousNode === undefined) {
       this._head = node;
@@ -128,7 +128,7 @@ export class DoubleLinkedList implements DLL {
     node.next = currentNode;
   }
 
-  removeAt(_index: number): number | undefined {
+  removeAt(_index: number): VType | undefined {
     if (!this._head || !this._tail) {
       return undefined;
     }
@@ -162,8 +162,8 @@ export class DoubleLinkedList implements DLL {
     return currentNode.value;
   }
 
-  indexOf(value: number): number {
-    let currentNode: DLLNode | undefined = this._head;
+  indexOf(value: VType): number {
+    let currentNode: DLLNode<VType> | undefined = this._head;
     let i = 0;
     while (currentNode !== undefined) {
       if (currentNode.value === value) {
@@ -175,9 +175,9 @@ export class DoubleLinkedList implements DLL {
     return -1;
   }
 
-  toArray(): number[] {
-    const array: number[] = [];
-    let currentNode: DLLNode | undefined = this._head;
+  toArray(): VType[] {
+    const array: VType[] = [];
+    let currentNode: DLLNode<VType> | undefined = this._head;
     while (currentNode !== undefined) {
       array.push(currentNode.value);
       currentNode = currentNode.next;
@@ -185,11 +185,11 @@ export class DoubleLinkedList implements DLL {
     return array;
   }
 
-  peak(): number | undefined {
+  peak(): VType | undefined {
     return this._tail?.value;
   }
 
-  *values(): IterableIterator<number> {
+  *values(): IterableIterator<VType> {
     let currentNode = this._head;
     while (currentNode !== undefined) {
       yield currentNode.value;
@@ -197,11 +197,11 @@ export class DoubleLinkedList implements DLL {
     }
   }
 
-  get head(): number | undefined {
+  get head(): VType | undefined {
     return this._head?.value;
   }
 
-  get tail(): number | undefined {
+  get tail(): VType | undefined {
     return this._tail?.value;
   }
 
