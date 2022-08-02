@@ -1,34 +1,17 @@
-interface SLLNode<VType> {
+import { LinkedListBase, LL } from './base-linked-list';
+
+interface LLNode<VType> {
   value: VType;
-  next?: SLLNode<VType>;
+  next?: LLNode<VType>;
 }
 
-interface SLL<VType> {
-  length: number;
-  head: VType | undefined;
-  tail: VType | undefined;
-
-  push(value: VType): void;
-  pop(): VType | undefined;
-  insertAt(index: number, value: VType): void;
-  removeAt(index: number): VType | undefined;
-  peak(): VType | undefined;
-  at(index: number): VType | undefined;
-  toArray(): VType[];
-  indexOf(value: VType): number;
-  values(): IterableIterator<VType>;
-}
-
-export class SinglyLinkedList<VType> implements SLL<VType> {
-  protected _length: number;
-  protected _head: SLLNode<VType> | undefined;
-
+export class SinglyLinkedList<VType> extends LinkedListBase<LLNode<VType>> implements LL<VType> {
   constructor() {
-    this._length = 0;
+    super();
   }
 
   push(value: VType): void {
-    const node: SLLNode<VType> = { value };
+    const node: LLNode<VType> = { value };
     const [, currentNode] = this.pairAt(this.length - 1);
     if (currentNode === undefined) {
       this._head = node;
@@ -78,7 +61,7 @@ export class SinglyLinkedList<VType> implements SLL<VType> {
       return;
     }
 
-    const node: SLLNode<VType> = { value };
+    const node: LLNode<VType> = { value };
     const [previousNode, currentNode] = this.pairAt(index);
 
     if (previousNode === undefined) {
@@ -91,50 +74,16 @@ export class SinglyLinkedList<VType> implements SLL<VType> {
     node.next = currentNode;
   }
 
-  private pairAt(index: number): [SLLNode<VType> | undefined, SLLNode<VType> | undefined] {
+  private pairAt(index: number): [LLNode<VType> | undefined, LLNode<VType> | undefined] {
     let i = 0;
-    let previousNode: SLLNode<VType> | undefined;
-    let currentNode: SLLNode<VType> | undefined = this._head;
+    let previousNode: LLNode<VType> | undefined;
+    let currentNode: LLNode<VType> | undefined = this._head;
     while (i < index) {
       previousNode = currentNode;
       currentNode = currentNode?.next;
       i++;
     }
     return [previousNode, currentNode];
-  }
-
-  private getIndex(_index: number): number | undefined {
-    let index = _index;
-
-    if (index >= this._length) {
-      return undefined;
-    }
-
-    if (index < 0) {
-      index = this._length + index;
-      if (index < 0) {
-        return undefined;
-      }
-    }
-
-    return index;
-  }
-
-  private nodeAt(_index: number): SLLNode<VType> | undefined {
-    const index = this.getIndex(_index);
-    if (index === undefined) {
-      return undefined;
-    }
-
-    let i = 0;
-    let currentNode: SLLNode<VType> | undefined = this._head;
-
-    while (i < index) {
-      currentNode = currentNode?.next;
-      i++;
-    }
-
-    return currentNode;
   }
 
   at(_index: number): VType | undefined {
@@ -185,9 +134,5 @@ export class SinglyLinkedList<VType> implements SLL<VType> {
   get tail(): VType | undefined {
     const tail = this.nodeAt(this.length - 1);
     return tail?.value;
-  }
-
-  get length(): number {
-    return this._length;
   }
 }
