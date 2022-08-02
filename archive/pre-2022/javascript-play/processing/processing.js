@@ -20,7 +20,7 @@ var Browser = {
   }
 };
 
-window.Processing = require('./src/')(Browser);
+window.Processing = require('./processing')(Browser);
 
 },{"./src/":27}],2:[function(require,module,exports){
 module.exports={

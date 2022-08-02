@@ -1,7 +1,0 @@
-.git
-.idea
-.vscode
-.data/
-node_modules
-dist
-public

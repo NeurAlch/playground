@@ -2,9 +2,9 @@
 
 ![tests](https://github.com/PabloRosales/playground/actions/workflows/node.js.yml/badge.svg)
 
-A playground for things I'm learning.
+A playground for things I'm learning/practicing.
 
-Most code in TypeScript is done using TDD. Python is done with Jupyter notebooks.
+Most code in TypeScript is done mostly using TDD. Python is done mostly with Jupyter notebooks.
 
 ![Screenshot](./screenshot.png)
 
@@ -19,7 +19,7 @@ Examples:
   * [seqSearch](./src/tests/unit-tests/algos/seqSearch.test.ts)
   * [sparseMatrix](./src/tests/unit-tests/algos/sparseMatrix.test.ts)
   * mergeSortLinkedLists (_pending_)
-  * [Old](./archive-before-2022/javascript-play/algorithms)
+  * [Old](archive/pre-2022/javascript-play/algorithms)
 * Data Structures
   * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts)
   * [JS Array (big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
@@ -28,16 +28,16 @@ Examples:
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
   * Double Linked List (_pending_)
   * Queue using Double Linked List (_pending_)
-  * [Old](./archive-before-2022/cs/data-structures)
+  * [Old](archive/pre-2022/cs/data-structures)
 * Design Patterns
-  * [Old](./archive-before-2022/javascript-play/design-patterns)
+  * [Old](archive/pre-2022/javascript-play/design-patterns)
 * Machine Learning
   * [New](./src/ml)
-  * [Old](./archive-before-2022/ai)
+  * [Old](archive/pre-2022/ai)
 * Math
-  * [Old](./archive-before-2022/math)
+  * [Old](archive/pre-2022/math)
 * TypeScript
 * Python
-  * [SEO Jupyter notebooks](./archive-before-2022/seo/notebooks)
+  * [SEO Jupyter notebooks](archive/pre-2022/seo/notebooks)
 * Archive
-  * [Old](./archive-before-2022)
+  * [Old](./archive)
