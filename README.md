@@ -28,8 +28,10 @@ Examples:
     * Benefits of a sorted list are lost on a sorted SLL
   * [Double Linked List](./src/tests/unit-tests/data-structures/double-linked-list.test.ts)
   * [Queue using Double Linked List](./src/tests/unit-tests/data-structures/queue-with-dll.test.ts)
-    * Using a DLL allows us to do operations O(1) for enqueue and dequeue, much faster than using a JS Array or a SLL
-    * Since each node can be anywhere in memory, we don't need to move nodes around (resize array) when we dequeue/enqueue
+    * Using a DLL allows us to do operations O(1) for enqueue and dequeue
+      * Faster than using a JS Array or an SLL
+      * Each node can be anywhere in memory
+      * We don't need to move resize the array or go through each element
 * Design Patterns
 * Machine Learning
   * [New](./src/ml)
