@@ -21,6 +21,17 @@ Examples:
   * mergeSortLinkedLists (_pending_)
 * Data Structures
   * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts)
+    * Sort
+      * Without a sort function it will convert elements into strings, 80 comes before 9
+      * The sorting algorithm is stable
+        * Elements that are already sorted, will remain in the same position
+      * Behaviour might not be well-defined unless
+        * purity, stability, reflexivity, symmetry, and transitivity rules are respected
+          * \> 0	sort a after b
+          *  < 0	sort a before b
+          *  === 0	keep original order of a and b
+        * `const compare = (a, b) => a > b ? -1 : 0;`
+          * Will have different results in V8 and SpiderMonkey
   * [JS Array (big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
   * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
   * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
