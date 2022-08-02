@@ -121,4 +121,16 @@ describe('SinglyLinkedList', () => {
     expect(sll.indexOf(3)).toBe(2);
     expect(sll.indexOf(4)).toBe(-1);
   });
+
+  it('SLL.values() should return an iterator over the values of the list', () => {
+    const sll = new SinglyLinkedList();
+    sll.push(1);
+    sll.push(2);
+    sll.push(3);
+    const values = sll.values();
+    expect(values.next().value).toBe(1);
+    expect(values.next().value).toBe(2);
+    expect(values.next().value).toBe(3);
+    expect(values.next().value).toBe(undefined);
+  });
 });

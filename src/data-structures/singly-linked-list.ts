@@ -15,6 +15,7 @@ interface SLL {
   at(index: number): number | undefined;
   toArray(): number[];
   indexOf(value: number): number;
+  values(): IterableIterator<number>;
 }
 
 export class SinglyLinkedList implements SLL {
@@ -147,6 +148,14 @@ export class SinglyLinkedList implements SLL {
   peak(): number | undefined {
     const currentNode = this.nodeAt(this.length - 1);
     return currentNode?.value;
+  }
+
+  *values(): IterableIterator<number> {
+    let currentNode = this.head;
+    while (currentNode !== undefined) {
+      yield currentNode.value;
+      currentNode = currentNode.next;
+    }
   }
 
   get length(): number {
