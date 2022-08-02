@@ -19,7 +19,6 @@ Examples:
   * [seqSearch](./src/tests/unit-tests/algos/seqSearch.test.ts)
   * [sparseMatrix](./src/tests/unit-tests/algos/sparseMatrix.test.ts)
   * mergeSortLinkedLists (_pending_)
-  * [Old](archive/pre-2022/javascript-play/algorithms)
 * Data Structures
   * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts)
   * [JS Array (big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
@@ -28,14 +27,10 @@ Examples:
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
   * Double Linked List (_pending_)
   * Queue using Double Linked List (_pending_)
-  * [Old](archive/pre-2022/cs/data-structures)
 * Design Patterns
-  * [Old](archive/pre-2022/javascript-play/design-patterns)
 * Machine Learning
   * [New](./src/ml)
-  * [Old](archive/pre-2022/ai)
 * Math
-  * [Old](archive/pre-2022/math)
 * TypeScript
 * Python
   * [SEO Jupyter notebooks](archive/pre-2022/seo/notebooks)

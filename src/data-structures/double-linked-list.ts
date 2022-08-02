@@ -8,10 +8,10 @@ interface DLL {
   length: number;
 
   push(value: number): void;
-  //pop(): number | undefined;
+  pop(): number | undefined;
   //insertAt(value: number, index: number): void;
   //removeAt(index: number): number | undefined;
-  //peak(): number | undefined;
+  peak(): number | undefined;
   //at(index: number): number | undefined;
   toArray(): number[];
   //indexOf(value: number): number;
@@ -42,6 +42,57 @@ export class DoubleLinkedList implements DLL {
     this._length++;
   }
 
+  pop(): number | undefined {
+    if (this.head === undefined || this.tail === undefined) {
+      return undefined;
+    }
+
+    const node = this.tail;
+    this.tail = this.tail.prev;
+    if (this.tail === undefined) {
+      this.head = undefined;
+    } else {
+      this.tail.next = undefined;
+    }
+
+    this._length--;
+    return node.value;
+  }
+
+  private nodeAt(_index: number): DLLNode | undefined {
+    const index = this.getIndex(_index);
+    if (index === undefined) {
+      return undefined;
+    }
+
+    let i = 0;
+    let currentNode: DLLNode | undefined = this.head;
+
+    while (i < index) {
+      currentNode = currentNode?.next;
+      i++;
+    }
+
+    return currentNode;
+  }
+
+  private getIndex(_index: number): number | undefined {
+    let index = _index;
+
+    if (index > this._length) {
+      return undefined;
+    }
+
+    if (index < 0) {
+      index = this._length + index;
+      if (index < 0) {
+        return undefined;
+      }
+    }
+
+    return index;
+  }
+
   toArray(): number[] {
     const array: number[] = [];
     let currentNode: DLLNode | undefined = this.head;
@@ -50,6 +101,10 @@ export class DoubleLinkedList implements DLL {
       currentNode = currentNode.next;
     }
     return array;
+  }
+
+  peak(): number | undefined {
+    return this.tail?.value;
   }
 
   get length(): number {
