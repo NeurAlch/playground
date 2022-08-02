@@ -529,6 +529,24 @@ describe('JS arrays', () => {
     expect(unshift(arr8, 0)).toEqual(4);
     expect(arr8).toEqual([0, 1, 2, 3]);
   });
+
+  it('Array.reverse()', () => {
+    expect([1, 2, 3].reverse()).toEqual([3, 2, 1]);
+    expect([].reverse()).toEqual([]);
+    expect([1].reverse()).toEqual([1]);
+  });
+
+  it('Array.sort()', () => {
+    expect([3, 2, 1].sort()).toEqual([1, 2, 3]);
+    // without a sort function items are first converted into strings, so 80 comes before 9
+    // null comes before undefined
+    expect([undefined, null, 0, 3, 2, 9, 8, 1, 80].sort()).toEqual([0, 1, 2, 3, 8, 80, 9, null, undefined]);
+    expect([3, 2, 1].sort((a, b) => a - b)).toEqual([1, 2, 3]);
+    expect([Infinity, 3, 2, 1].sort((a, b) => a - b)).toEqual([1, 2, 3, Infinity]);
+    expect([1, 2, 3].sort((a, b) => b - a)).toEqual([3, 2, 1]);
+    // if NaN is present, the sort will not work as expected
+    expect([1, NaN, 2, 3].sort((a, b) => b - a)).toEqual([1, NaN, 3, 2]);
+  });
 });
 
 export {};
