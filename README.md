@@ -25,8 +25,11 @@ Examples:
   * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
   * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
+    * Benefits of a sorted list are lost on a sorted SLL
   * [Double Linked List](./src/tests/unit-tests/data-structures/double-linked-list.test.ts)
-  * Queue using Double Linked List (_pending_)
+  * [Queue using Double Linked List](./src/tests/unit-tests/data-structures/queue-with-dll.test.ts)
+    * Using a DLL allows us to do operations O(1) for enqueue and dequeue, much faster than using a JS Array or a SLL
+    * Since each node can be anywhere in memory, we don't need to move nodes around (resize array) when we dequeue/enqueue
 * Design Patterns
 * Machine Learning
   * [New](./src/ml)
