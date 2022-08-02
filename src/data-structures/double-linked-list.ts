@@ -6,7 +6,7 @@ interface DLLNode<VType> {
   prev?: DLLNode<VType>;
 }
 
-export class DoubleLinkedList<VType> extends LinkedListBase<DLLNode<VType>> implements LL<VType> {
+export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType>> implements LL<VType> {
   protected _head: DLLNode<VType> | undefined;
   protected _tail: DLLNode<VType> | undefined;
 
@@ -113,43 +113,8 @@ export class DoubleLinkedList<VType> extends LinkedListBase<DLLNode<VType>> impl
     return currentNode?.value;
   }
 
-  toArray(): VType[] {
-    const array: VType[] = [];
-    let currentNode: DLLNode<VType> | undefined = this._head;
-    while (currentNode !== undefined) {
-      array.push(currentNode.value);
-      currentNode = currentNode.next;
-    }
-    return array;
-  }
-
-  indexOf(value: VType): number {
-    let currentNode: DLLNode<VType> | undefined = this._head;
-    let i = 0;
-    while (currentNode !== undefined) {
-      if (currentNode.value === value) {
-        return i;
-      }
-      currentNode = currentNode.next;
-      i++;
-    }
-    return -1;
-  }
-
   peak(): VType | undefined {
     return this._tail?.value;
-  }
-
-  *values(): IterableIterator<VType> {
-    let currentNode = this._head;
-    while (currentNode !== undefined) {
-      yield currentNode.value;
-      currentNode = currentNode.next;
-    }
-  }
-
-  get head(): VType | undefined {
-    return this._head?.value;
   }
 
   get tail(): VType | undefined {

@@ -5,7 +5,7 @@ interface LLNode<VType> {
   next?: LLNode<VType>;
 }
 
-export class SinglyLinkedList<VType> extends LinkedListBase<LLNode<VType>> implements LL<VType> {
+export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>> implements LL<VType> {
   constructor() {
     super();
   }
@@ -91,44 +91,9 @@ export class SinglyLinkedList<VType> extends LinkedListBase<LLNode<VType>> imple
     return currentNode?.value;
   }
 
-  toArray(): VType[] {
-    const array: VType[] = [];
-    let currentNode = this._head;
-    while (currentNode !== undefined) {
-      array.push(currentNode.value);
-      currentNode = currentNode.next;
-    }
-    return array;
-  }
-
-  indexOf(value: VType): number {
-    let i = 0;
-    let currentNode = this._head;
-    while (currentNode !== undefined) {
-      if (currentNode.value === value) {
-        return i;
-      }
-      currentNode = currentNode.next;
-      i++;
-    }
-    return -1;
-  }
-
   peak(): VType | undefined {
     const currentNode = this.nodeAt(this.length - 1);
     return currentNode?.value;
-  }
-
-  *values(): IterableIterator<VType> {
-    let currentNode = this._head;
-    while (currentNode !== undefined) {
-      yield currentNode.value;
-      currentNode = currentNode.next;
-    }
-  }
-
-  get head(): VType | undefined {
-    return this._head?.value;
   }
 
   get tail(): VType | undefined {

@@ -1,9 +1,13 @@
-interface LLBase {
+interface LLBase<VType> {
   length: number;
+  head: VType | undefined;
+
+  values(): IterableIterator<VType>;
+  indexOf(value: VType): number;
+  toArray(): VType[];
 }
 
-export interface LL<VType> extends LLBase {
-  head: VType | undefined;
+export interface LL<VType> extends LLBase<VType> {
   tail: VType | undefined;
 
   push(value: VType): void;
@@ -12,12 +16,9 @@ export interface LL<VType> extends LLBase {
   removeAt(index: number): VType | undefined;
   peak(): VType | undefined;
   at(index: number): VType | undefined;
-  toArray(): VType[];
-  indexOf(value: VType): number;
-  values(): IterableIterator<VType>;
 }
 
-export class LinkedListBase<NType extends { next?: NType }> implements LLBase {
+export class LinkedListBase<VType, NType extends { next?: NType; value: VType }> implements LLBase<VType> {
   protected _length: number;
   protected _head: NType | undefined;
 
@@ -57,6 +58,41 @@ export class LinkedListBase<NType extends { next?: NType }> implements LLBase {
     }
 
     return currentNode;
+  }
+
+  toArray(): VType[] {
+    const array: VType[] = [];
+    let currentNode = this._head;
+    while (currentNode !== undefined) {
+      array.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return array;
+  }
+
+  indexOf(value: VType): number {
+    let i = 0;
+    let currentNode = this._head;
+    while (currentNode !== undefined) {
+      if (currentNode.value === value) {
+        return i;
+      }
+      currentNode = currentNode.next;
+      i++;
+    }
+    return -1;
+  }
+
+  *values(): IterableIterator<VType> {
+    let currentNode = this._head;
+    while (currentNode !== undefined) {
+      yield currentNode.value;
+      currentNode = currentNode.next;
+    }
+  }
+
+  get head(): VType | undefined {
+    return this._head?.value;
   }
 
   get length(): number {
