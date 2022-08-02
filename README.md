@@ -2,7 +2,13 @@
 
 ![tests](https://github.com/PabloRosales/playground/actions/workflows/node.js.yml/badge.svg)
 
-A playground for things I'm learning, examples:
+A playground for things I'm learning.
+
+Most code in TypeScript is done using TDD. Python is done with Jupyter notebooks.
+
+![Screenshot](./screenshot.png)
+
+Examples:
 
 * Algorithms
   * [fibonacci](./src/tests/unit-tests/algos/fibonacci.test.ts)

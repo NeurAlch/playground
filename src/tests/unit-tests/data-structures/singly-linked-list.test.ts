@@ -59,15 +59,15 @@ describe('SinglyLinkedList', () => {
     expect(sll.length).toBe(2);
     expect(sll.toArray()).toEqual([1, 3]);
 
-    // negative value returns undefined
-    expect(sll.removeAt(-1)).toBe(undefined);
-    expect(sll.length).toBe(2);
-    expect(sll.toArray()).toEqual([1, 3]);
+    // remove with negative index
+    expect(sll.removeAt(-1)).toBe(3);
+    expect(sll.length).toBe(1);
+    expect(sll.toArray()).toEqual([1]);
 
     // index greater than length returns undefined
     expect(sll.removeAt(10)).toBe(undefined);
-    expect(sll.length).toBe(2);
-    expect(sll.toArray()).toEqual([1, 3]);
+    expect(sll.length).toBe(1);
+    expect(sll.toArray()).toEqual([1]);
   });
 
   it('SLL.peak() should return the value of the last node', () => {
@@ -109,6 +109,17 @@ describe('SinglyLinkedList', () => {
     sll.insertAt(4, 4);
     expect(sll.length).toBe(5);
     expect(sll.toArray()).toEqual([0, 1, 2, 3, 4]);
+    sll.insertAt(sll.length, 6);
+    expect(sll.length).toBe(6);
+    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 6]);
+    sll.insertAt(-1, 5);
+    expect(sll.length).toBe(7);
+    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 5, 6]);
+
+    // index greater than length is a no-op
+    sll.insertAt(10, 1);
+    expect(sll.length).toBe(7);
+    expect(sll.toArray()).toEqual([0, 1, 2, 3, 4, 5, 6]);
   });
 
   it('SLL.indexOf() should return the index of the given value', () => {
