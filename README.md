@@ -12,6 +12,7 @@ A playground for things I'm learning, examples:
   * [maxIndex](./src/tests/unit-tests/algos/maxIndex.test.ts)
   * [seqSearch](./src/tests/unit-tests/algos/seqSearch.test.ts)
   * [sparseMatrix](./src/tests/unit-tests/algos/sparseMatrix.test.ts)
+  * mergeSortLinkedLists (_pending_)
   * [Old](./archive-before-2022/javascript-play/algorithms)
 * Data Structures
   * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts)
@@ -19,6 +20,8 @@ A playground for things I'm learning, examples:
   * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
   * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
+  * Double Linked List (_pending_)
+  * Queue using Double Linked List (_pending_)
   * [Old](./archive-before-2022/cs/data-structures)
 * Design Patterns
   * [Old](./archive-before-2022/javascript-play/design-patterns)
