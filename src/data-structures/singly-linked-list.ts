@@ -42,7 +42,7 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     const [previousNode, currentNode] = this.pairAt(index);
 
     if (previousNode === undefined) {
-      this._head = undefined;
+      this._head = currentNode?.next;
     } else {
       previousNode.next = currentNode?.next;
     }
@@ -86,8 +86,17 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     return [previousNode, currentNode];
   }
 
+  shift(): VType | undefined {
+    return this.removeAt(0);
+  }
+
   at(_index: number): VType | undefined {
-    const currentNode = this.nodeAt(_index);
+    const index = this.getIndex(_index);
+    if (index === undefined) {
+      return undefined;
+    }
+
+    const currentNode = this.nodeAt(index);
     return currentNode?.value;
   }
 

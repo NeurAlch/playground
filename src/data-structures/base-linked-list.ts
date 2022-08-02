@@ -16,6 +16,7 @@ export interface LL<VType> extends LLBase<VType> {
   removeAt(index: number): VType | undefined;
   peak(): VType | undefined;
   at(index: number): VType | undefined;
+  shift(): VType | undefined;
 }
 
 export class LinkedListBase<VType, NType extends { next?: NType; value: VType }> implements LLBase<VType> {
@@ -43,12 +44,7 @@ export class LinkedListBase<VType, NType extends { next?: NType; value: VType }>
     return index;
   }
 
-  protected nodeAt(_index: number): NType | undefined {
-    const index = this.getIndex(_index);
-    if (index === undefined) {
-      return undefined;
-    }
-
+  protected nodeAt(index: number): NType | undefined {
     let i = 0;
     let currentNode: NType | undefined = this._head;
 

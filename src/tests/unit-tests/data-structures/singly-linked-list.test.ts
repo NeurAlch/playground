@@ -62,12 +62,21 @@ describe('SinglyLinkedList', () => {
     expect(sll.head).toBe(1);
     expect(sll.tail).toBe(1);
 
-    // removing the head leaves an empty list
+    // remove head as last element
     expect(sll.removeAt(0)).toBe(1);
     expect(sll.length).toBe(0);
     expect(sll.toArray()).toEqual([]);
     expect(sll.head).toBe(undefined);
     expect(sll.tail).toBe(undefined);
+
+    // remove head with more elements
+    sll.push(0);
+    sll.push(1);
+    expect(sll.removeAt(0)).toBe(0);
+    expect(sll.length).toBe(1);
+    expect(sll.toArray()).toEqual([1]);
+    expect(sll.head).toBe(1);
+    sll.pop();
 
     // remove in the middle
     sll.push(1);
@@ -172,5 +181,17 @@ describe('SinglyLinkedList', () => {
     expect(values.next().value).toBe(2);
     expect(values.next().value).toBe(3);
     expect(values.next().value).toBe(undefined);
+  });
+
+  it('SSL.shift() should remove the first node and return its value', () => {
+    const sll = new SinglyLinkedList<number>();
+    sll.push(1);
+    sll.push(2);
+    sll.push(3);
+    expect(sll.shift()).toBe(1);
+    expect(sll.length).toBe(2);
+    expect(sll.toArray()).toEqual([2, 3]);
+    expect(sll.head).toBe(2);
+    expect(sll.tail).toBe(3);
   });
 });

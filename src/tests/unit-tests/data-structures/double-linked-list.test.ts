@@ -60,12 +60,21 @@ describe('DoubleLinkedList', () => {
     expect(dll.head).toBe(1);
     expect(dll.tail).toBe(1);
 
-    // removing the head leaves an empty list
+    // remove head as last element
     expect(dll.removeAt(0)).toBe(1);
     expect(dll.length).toBe(0);
     expect(dll.toArray()).toEqual([]);
     expect(dll.head).toBe(undefined);
     expect(dll.tail).toBe(undefined);
+
+    // remove head with more elements
+    dll.push(0);
+    dll.push(1);
+    expect(dll.removeAt(0)).toBe(0);
+    expect(dll.length).toBe(1);
+    expect(dll.toArray()).toEqual([1]);
+    expect(dll.head).toBe(1);
+    dll.pop();
 
     // remove in the middle
     dll.push(1);

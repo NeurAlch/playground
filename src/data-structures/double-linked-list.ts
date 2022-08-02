@@ -108,7 +108,16 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     node.next = currentNode;
   }
 
-  at(index: number): VType | undefined {
+  shift(): VType | undefined {
+    return this.removeAt(0);
+  }
+
+  at(_index: number): VType | undefined {
+    const index = this.getIndex(_index);
+    if (index === undefined) {
+      return undefined;
+    }
+
     const currentNode = this.nodeAt(index);
     return currentNode?.value;
   }
