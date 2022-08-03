@@ -12,10 +12,13 @@ export const reverseLinkedList = (sll: SinglyLinkedList<number>): void => {
   let pointer: LLNode<number> | undefined = sll.headNode;
 
   while (pointer) {
+    /* with a tmp variable
     const tmpNext: LLNode<number> | undefined = pointer.next;
     pointer.next = newNext;
     newNext = pointer;
     pointer = tmpNext;
+    */
+    [pointer.next, newNext, pointer] = [newNext, pointer, pointer.next];
   }
 
   sll.headNode = newNext;
