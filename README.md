@@ -8,9 +8,14 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
 
 ![Screenshot](./screenshot.png)
 
-Examples:
+## Code & Notes
 
 * [Algorithms](src/tests/algos)
+  * [Asymptotic Analysis (notes)](./notes/asymptotic-complexity.md)
+  * Useful concepts for solving problems
+    * Pointers to go through an array/data structure
+    * Sorting before we start
+    * Hash maps to store partial results
 * Data Structures
   * [JS Array](src/tests/data-structures/arrays.test.ts) [(big-o)](src/tests/data-structures/array.big-o.test.ts)
     * Sort
