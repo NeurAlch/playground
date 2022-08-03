@@ -2,7 +2,7 @@ export interface IQueue<TValue> {
   length: number;
   enqueue(value: TValue): void;
   dequeue(): TValue | undefined;
-  peek(): TValue | undefined;
+  read(): TValue | undefined;
 }
 
 export class Queue<TValue> implements IQueue<TValue> {
@@ -20,7 +20,7 @@ export class Queue<TValue> implements IQueue<TValue> {
     return this._queue.shift();
   }
 
-  peek(): TValue | undefined {
+  read(): TValue | undefined {
     return this._queue[0];
   }
 
