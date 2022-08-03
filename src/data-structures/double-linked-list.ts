@@ -6,7 +6,7 @@ interface DLLNode<VType> {
   prev?: DLLNode<VType>;
 }
 
-export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType>> implements LL<VType> {
+export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType>> implements LL<VType, DLLNode<VType>> {
   protected _head: DLLNode<VType> | undefined;
   protected _tail: DLLNode<VType> | undefined;
 

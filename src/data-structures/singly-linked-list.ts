@@ -1,11 +1,11 @@
 import { LinkedListBase, LL } from './base-linked-list';
 
-interface LLNode<VType> {
+export interface LLNode<VType> {
   value: VType;
   next?: LLNode<VType>;
 }
 
-export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>> implements LL<VType> {
+export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>> implements LL<VType, LLNode<VType>> {
   constructor() {
     super();
   }

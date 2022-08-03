@@ -1,13 +1,14 @@
-interface LLBase<VType> {
+interface LLBase<VType, NType> {
   length: number;
   head: VType | undefined;
+  headNode: NType | undefined;
 
   values(): IterableIterator<VType>;
   indexOf(value: VType): number;
   toArray(): VType[];
 }
 
-export interface LL<VType> extends LLBase<VType> {
+export interface LL<VType, NType> extends LLBase<VType, NType> {
   tail: VType | undefined;
 
   push(value: VType): void;
@@ -19,7 +20,7 @@ export interface LL<VType> extends LLBase<VType> {
   shift(): VType | undefined;
 }
 
-export class LinkedListBase<VType, NType extends { next?: NType; value: VType }> implements LLBase<VType> {
+export class LinkedListBase<VType, NType extends { next?: NType; value: VType }> implements LLBase<VType, NType> {
   protected _length: number;
   protected _head: NType | undefined;
 
@@ -89,6 +90,14 @@ export class LinkedListBase<VType, NType extends { next?: NType; value: VType }>
 
   get head(): VType | undefined {
     return this._head?.value;
+  }
+
+  get headNode(): NType | undefined {
+    return this._head;
+  }
+
+  set headNode(node: NType | undefined) {
+    this._head = node;
   }
 
   get length(): number {

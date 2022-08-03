@@ -38,11 +38,11 @@ Examples:
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
     * Benefits of a sorted list are lost on a sorted SLL
   * [Double Linked List](./src/tests/unit-tests/data-structures/double-linked-list.test.ts)
+    * Each node can be anywhere in memory, no need to resize an array
+    * We don't need to shift position of elements when inserting or deleting like in an array
   * [Queue using Double Linked List](./src/tests/unit-tests/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
-      * Each node can be anywhere in memory
-      * We don't need to move resize the array or go through each element
 * Design Patterns
 * Machine Learning
   * [New](./src/ml)
