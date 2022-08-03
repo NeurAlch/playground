@@ -12,7 +12,7 @@ Examples:
 
 * [Algorithms](./src/tests/unit-tests/algos)
 * Data Structures
-  * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts)
+  * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts) [(big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
     * Sort
       * Without a sort function it will convert elements into strings, 80 comes before 9
       * The sorting algorithm is stable
@@ -24,7 +24,6 @@ Examples:
           *  === 0	keep original order of a and b
         * `const compare = (a, b) => a > b ? -1 : 0;`
           * Will have different results in V8 and SpiderMonkey
-  * [JS Array (big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
   * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
   * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
   * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)

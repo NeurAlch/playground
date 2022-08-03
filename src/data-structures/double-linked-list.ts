@@ -1,6 +1,6 @@
 import { LinkedListBase, LL } from './base-linked-list';
 
-interface DLLNode<VType> {
+export interface DLLNode<VType> {
   value: VType;
   next?: DLLNode<VType>;
   prev?: DLLNode<VType>;
@@ -128,5 +128,13 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
 
   get tail(): VType | undefined {
     return this._tail?.value;
+  }
+
+  get tailNode(): DLLNode<VType> | undefined {
+    return this._tail;
+  }
+
+  set tailNode(node: DLLNode<VType> | undefined) {
+    this._tail = node;
   }
 }
