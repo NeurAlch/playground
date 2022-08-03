@@ -1,9 +1,9 @@
-interface IStack<TValue> {
+export interface IStack<TValue> {
   length: number;
 
-  push(value: TValue): void;
-  pop(): TValue | undefined;
-  peek(): TValue | undefined;
+  insert(value: TValue): void;
+  delete(): TValue | undefined;
+  read(): TValue | undefined;
 }
 
 export class Stack<TValue> implements IStack<TValue> {
@@ -13,15 +13,15 @@ export class Stack<TValue> implements IStack<TValue> {
     this._array = [];
   }
 
-  push(value: TValue): void {
+  insert(value: TValue): void {
     this._array.push(value);
   }
 
-  pop(): TValue | undefined {
+  delete(): TValue | undefined {
     return this._array.pop();
   }
 
-  peek(): TValue | undefined {
+  read(): TValue | undefined {
     return this._array[this._array.length - 1];
   }
 
