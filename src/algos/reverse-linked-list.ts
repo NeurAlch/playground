@@ -27,11 +27,14 @@ export const reverseLinkedList = (sll: SinglyLinkedList<number>): void => {
 export const reverseLinkedListRecursive = (sll: SinglyLinkedList<number>): void => {
   const head = sll.headNode;
 
-  const recursiveReverse = (currentNode: LLNode<number> | undefined): LLNode<number> | undefined => {
-    if (!currentNode) {
-      return undefined;
+  // convert the while loop into a recursive function
+  const recursiveReverse = (pointer: LLNode<number> | undefined, newNext: LLNode<number> | undefined): LLNode<number> | undefined => {
+    if (!pointer) {
+      return newNext;
     }
+    [pointer.next, newNext, pointer] = [newNext, pointer, pointer.next];
+    return recursiveReverse(pointer, newNext);
   };
 
-  sll.headNode = recursiveReverse(head);
+  sll.headNode = recursiveReverse(head, undefined);
 };

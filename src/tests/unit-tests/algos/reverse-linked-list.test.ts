@@ -12,7 +12,6 @@ describe('reverse linked list', () => {
     expect(sll.toArray()).toEqual([0, 1, 2, 3]);
   });
 
-  /*
   it('reverses a linked list recursively', () => {
     const sll = new SinglyLinkedList<number>();
     sll.push(0);
@@ -22,5 +21,4 @@ describe('reverse linked list', () => {
     reverseLinkedListRecursive(sll);
     expect(sll.toArray()).toEqual([3, 2, 1, 0]);
   });
-  */
 });
