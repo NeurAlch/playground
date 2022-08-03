@@ -27,7 +27,6 @@ Examples:
   * [JS Map](src/tests/data-structures/map.test.ts)
   * [JS Set](src/tests/data-structures/set.test.ts)
   * [Stack using Array](src/tests/data-structures/stack.test.ts)
-  * [Stack using Linked List](src/tests/data-structures/stack-with-ll.test.ts)
   * [Singly Linked List](src/tests/data-structures/singly-linked-list.test.ts)
     * Benefits of a sorted list are lost on a sorted SLL
   * [Double Linked List](src/tests/data-structures/double-linked-list.test.ts)
