@@ -37,6 +37,7 @@ describe('Stack', () => {
     expect(() => {
       stack.insert(4);
     }).toThrowError('Stack is full');
+    expect(stack.toArray()).toEqual([1, 2, 3]);
     expect(stack.length).toBe(3);
     expect(stack.read()).toBe(3);
     expect(stack.delete()).toBe(3);
@@ -48,6 +49,7 @@ describe('Stack', () => {
     expect(stack.read()).toBe(3);
     expect(stack.isEmpty()).toBe(false);
     stack.delete();
+    expect(stack.toArray()).toEqual([1, 2, undefined]);
     stack.delete();
     stack.delete();
     expect(stack.isEmpty()).toBe(true);
@@ -56,5 +58,6 @@ describe('Stack', () => {
     }).toThrowError('Stack is empty');
     expect(stack.length).toBe(0);
     expect(stack.read()).toBeUndefined();
+    expect(stack.toArray()).toEqual([undefined, undefined, undefined]);
   });
 });

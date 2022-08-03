@@ -8,6 +8,7 @@ export interface IStack<TValue> {
   insert(value: TValue): void;
   delete(): TValue | undefined;
   read(): TValue | undefined;
+  toArray(): Array<TValue | undefined>;
 }
 
 export class Stack<TValue> implements IStack<TValue> {
@@ -56,5 +57,9 @@ export class Stack<TValue> implements IStack<TValue> {
 
   isFull(): boolean {
     return this._topPointer + 1 === this._maxSize;
+  }
+
+  toArray(): Array<TValue | undefined> {
+    return [...this._array];
   }
 }
