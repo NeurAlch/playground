@@ -1,4 +1,4 @@
-import { DLLNode, DoubleLinkedList } from '../data-structures/double-linked-list';
+import { IDoubleLinkedListNode, DoubleLinkedList } from '../data-structures/double-linked-list';
 
 /*
  * [head] 1 -> 2 -> 3 -> 4 -> 5 -> null [tail]
@@ -10,8 +10,8 @@ export const reverseDoubleLinkedList = (dll: DoubleLinkedList<number>): void => 
   }
 
   const firstNode = dll.headNode;
-  let pointer: DLLNode<number> | undefined = dll.headNode;
-  let newNext: DLLNode<number> | undefined;
+  let pointer: IDoubleLinkedListNode<number> | undefined = dll.headNode;
+  let newNext: IDoubleLinkedListNode<number> | undefined;
 
   while (pointer) {
     /* with tmp variables

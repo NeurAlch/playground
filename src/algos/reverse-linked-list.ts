@@ -1,4 +1,4 @@
-import { LLNode, SinglyLinkedList } from '../data-structures/singly-linked-list';
+import { ILinkedListNode, SinglyLinkedList } from '../data-structures/singly-linked-list';
 
 // We switch where the nodes are pointing to
 // [old head] 3 -> 2 -> 1 -> 0 -> null
@@ -8,8 +8,8 @@ export const reverseLinkedList = (sll: SinglyLinkedList<number>): void => {
     return;
   }
 
-  let newNext: LLNode<number> | undefined;
-  let pointer: LLNode<number> | undefined = sll.headNode;
+  let newNext: ILinkedListNode<number> | undefined;
+  let pointer: ILinkedListNode<number> | undefined = sll.headNode;
 
   while (pointer) {
     /* with a tmp variable
@@ -28,7 +28,7 @@ export const reverseLinkedListRecursive = (sll: SinglyLinkedList<number>): void 
   const head = sll.headNode;
 
   // convert the while loop into a recursive function
-  const recursiveReverse = (pointer: LLNode<number> | undefined, newNext: LLNode<number> | undefined): LLNode<number> | undefined => {
+  const recursiveReverse = (pointer: ILinkedListNode<number> | undefined, newNext: ILinkedListNode<number> | undefined): ILinkedListNode<number> | undefined => {
     if (!pointer) {
       return newNext;
     }

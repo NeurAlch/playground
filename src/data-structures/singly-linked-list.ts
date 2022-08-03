@@ -1,17 +1,20 @@
-import { LinkedListBase, LL } from './base-linked-list';
+import { LinkedListBase, ILinkedList } from './base-linked-list';
 
-export interface LLNode<VType> {
+export interface ILinkedListNode<VType> {
   value: VType;
-  next?: LLNode<VType>;
+  next?: ILinkedListNode<VType>;
 }
 
-export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>> implements LL<VType, LLNode<VType>> {
+export class SinglyLinkedList<TValue>
+  extends LinkedListBase<TValue, ILinkedListNode<TValue>>
+  implements ILinkedList<TValue, ILinkedListNode<TValue>>
+{
   constructor() {
     super();
   }
 
-  push(value: VType): void {
-    const node: LLNode<VType> = { value };
+  push(value: TValue): void {
+    const node: ILinkedListNode<TValue> = { value };
     const [, currentNode] = this.pairAt(this.length - 1);
     if (currentNode === undefined) {
       this._head = node;
@@ -21,7 +24,7 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     this._length++;
   }
 
-  pop(): VType | undefined {
+  pop(): TValue | undefined {
     if (this._head === undefined) {
       return undefined;
     }
@@ -29,7 +32,7 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     return this.removeAt(this.length - 1);
   }
 
-  removeAt(_index: number): VType | undefined {
+  removeAt(_index: number): TValue | undefined {
     if (!this._head) {
       return undefined;
     }
@@ -51,7 +54,7 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     return currentNode?.value;
   }
 
-  insertAt(_index: number, value: VType): void {
+  insertAt(_index: number, value: TValue): void {
     if (!this._head) {
       return;
     }
@@ -61,7 +64,7 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
       return;
     }
 
-    const node: LLNode<VType> = { value };
+    const node: ILinkedListNode<TValue> = { value };
     const [previousNode, currentNode] = this.pairAt(index);
 
     if (previousNode === undefined) {
@@ -74,10 +77,10 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     node.next = currentNode;
   }
 
-  private pairAt(index: number): [LLNode<VType> | undefined, LLNode<VType> | undefined] {
+  private pairAt(index: number): [ILinkedListNode<TValue> | undefined, ILinkedListNode<TValue> | undefined] {
     let i = 0;
-    let previousNode: LLNode<VType> | undefined;
-    let currentNode: LLNode<VType> | undefined = this._head;
+    let previousNode: ILinkedListNode<TValue> | undefined;
+    let currentNode: ILinkedListNode<TValue> | undefined = this._head;
     while (i < index) {
       previousNode = currentNode;
       currentNode = currentNode?.next;
@@ -86,11 +89,11 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     return [previousNode, currentNode];
   }
 
-  shift(): VType | undefined {
+  shift(): TValue | undefined {
     return this.removeAt(0);
   }
 
-  at(_index: number): VType | undefined {
+  at(_index: number): TValue | undefined {
     const index = this.getIndex(_index);
     if (index === undefined) {
       return undefined;
@@ -100,12 +103,12 @@ export class SinglyLinkedList<VType> extends LinkedListBase<VType, LLNode<VType>
     return currentNode?.value;
   }
 
-  peak(): VType | undefined {
+  peak(): TValue | undefined {
     const currentNode = this.nodeAt(this.length - 1);
     return currentNode?.value;
   }
 
-  get tail(): VType | undefined {
+  get tail(): TValue | undefined {
     const tail = this.nodeAt(this.length - 1);
     return tail?.value;
   }

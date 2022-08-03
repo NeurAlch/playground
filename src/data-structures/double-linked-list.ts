@@ -1,21 +1,24 @@
-import { LinkedListBase, LL } from './base-linked-list';
+import { LinkedListBase, ILinkedList } from './base-linked-list';
 
-export interface DLLNode<VType> {
-  value: VType;
-  next?: DLLNode<VType>;
-  prev?: DLLNode<VType>;
+export interface IDoubleLinkedListNode<TValue> {
+  value: TValue;
+  next?: IDoubleLinkedListNode<TValue>;
+  prev?: IDoubleLinkedListNode<TValue>;
 }
 
-export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType>> implements LL<VType, DLLNode<VType>> {
-  protected _head: DLLNode<VType> | undefined;
-  protected _tail: DLLNode<VType> | undefined;
+export class DoubleLinkedList<TValue>
+  extends LinkedListBase<TValue, IDoubleLinkedListNode<TValue>>
+  implements ILinkedList<TValue, IDoubleLinkedListNode<TValue>>
+{
+  protected _head: IDoubleLinkedListNode<TValue> | undefined;
+  protected _tail: IDoubleLinkedListNode<TValue> | undefined;
 
   constructor() {
     super();
   }
 
-  push(value: VType): void {
-    const node: DLLNode<VType> = { value };
+  push(value: TValue): void {
+    const node: IDoubleLinkedListNode<TValue> = { value };
 
     if (this._head === undefined || this._tail === undefined) {
       this._head = node;
@@ -29,7 +32,7 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     this._length++;
   }
 
-  pop(): VType | undefined {
+  pop(): TValue | undefined {
     if (this._head === undefined || this._tail === undefined) {
       return undefined;
     }
@@ -46,7 +49,7 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     return node.value;
   }
 
-  removeAt(_index: number): VType | undefined {
+  removeAt(_index: number): TValue | undefined {
     if (!this._head || !this._tail) {
       return undefined;
     }
@@ -80,7 +83,7 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     return currentNode.value;
   }
 
-  insertAt(_index: number, value: VType): void {
+  insertAt(_index: number, value: TValue): void {
     if (!this._head) {
       return;
     }
@@ -90,9 +93,9 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
       return;
     }
 
-    const node: DLLNode<VType> = { value };
-    const currentNode: DLLNode<VType> | undefined = this.nodeAt(index);
-    const previousNode: DLLNode<VType> | undefined = currentNode?.prev;
+    const node: IDoubleLinkedListNode<TValue> = { value };
+    const currentNode: IDoubleLinkedListNode<TValue> | undefined = this.nodeAt(index);
+    const previousNode: IDoubleLinkedListNode<TValue> | undefined = currentNode?.prev;
 
     if (previousNode === undefined) {
       this._head = node;
@@ -108,11 +111,11 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     node.next = currentNode;
   }
 
-  shift(): VType | undefined {
+  shift(): TValue | undefined {
     return this.removeAt(0);
   }
 
-  at(_index: number): VType | undefined {
+  at(_index: number): TValue | undefined {
     const index = this.getIndex(_index);
     if (index === undefined) {
       return undefined;
@@ -122,19 +125,19 @@ export class DoubleLinkedList<VType> extends LinkedListBase<VType, DLLNode<VType
     return currentNode?.value;
   }
 
-  peak(): VType | undefined {
+  peak(): TValue | undefined {
     return this._tail?.value;
   }
 
-  get tail(): VType | undefined {
+  get tail(): TValue | undefined {
     return this._tail?.value;
   }
 
-  get tailNode(): DLLNode<VType> | undefined {
+  get tailNode(): IDoubleLinkedListNode<TValue> | undefined {
     return this._tail;
   }
 
-  set tailNode(node: DLLNode<VType> | undefined) {
+  set tailNode(node: IDoubleLinkedListNode<TValue> | undefined) {
     this._tail = node;
   }
 }

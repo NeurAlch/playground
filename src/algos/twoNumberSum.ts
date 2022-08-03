@@ -17,10 +17,10 @@ export const twoNumberSumHash = (arr: number[], target: number): number[] => {
   // X = target - Y
   for (let i = 0; i < arr.length; i++) {
     const diff = target - arr[i];
-    hash[arr[i]] = diff;
     if (hash[diff] !== undefined && diff !== arr[i]) {
-      return [hash[arr[i]], arr[i]];
+      return [diff, arr[i]];
     }
+    hash[arr[i]] = diff;
   }
   return [];
 };
