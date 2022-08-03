@@ -10,9 +10,9 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
 
 Examples:
 
-* [Algorithms](./src/tests/unit-tests/algos)
+* [Algorithms](src/tests/algos)
 * Data Structures
-  * [JS Array](./src/tests/unit-tests/data-structures/arrays.test.ts) [(big-o)](./src/tests/unit-tests/data-structures/array.big-o.test.ts)
+  * [JS Array](src/tests/data-structures/arrays.test.ts) [(big-o)](src/tests/data-structures/array.big-o.test.ts)
     * Sort
       * Without a sort function it will convert elements into strings, 80 comes before 9
       * The sorting algorithm is stable
@@ -24,14 +24,16 @@ Examples:
           *  === 0	keep original order of a and b
         * `const compare = (a, b) => a > b ? -1 : 0;`
           * Will have different results in V8 and SpiderMonkey
-  * [JS Map](./src/tests/unit-tests/data-structures/map.test.ts)
-  * [JS Set](./src/tests/unit-tests/data-structures/set.test.ts)
-  * [Singly Linked List](./src/tests/unit-tests/data-structures/singly-linked-list.test.ts)
+  * [JS Map](src/tests/data-structures/map.test.ts)
+  * [JS Set](src/tests/data-structures/set.test.ts)
+  * [Stack using Array](src/tests/data-structures/stack.test.ts)
+  * [Stack using Linked List](src/tests/data-structures/stack-with-ll.test.ts)
+  * [Singly Linked List](src/tests/data-structures/singly-linked-list.test.ts)
     * Benefits of a sorted list are lost on a sorted SLL
-  * [Double Linked List](./src/tests/unit-tests/data-structures/double-linked-list.test.ts)
+  * [Double Linked List](src/tests/data-structures/double-linked-list.test.ts)
     * Each node can be anywhere in memory, no need to resize an array
     * We don't need to shift position of elements when inserting or deleting like in an array
-  * [Queue using Double Linked List](./src/tests/unit-tests/data-structures/queue-with-dll.test.ts)
+  * [Queue using Double Linked List](src/tests/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
 * Design Patterns

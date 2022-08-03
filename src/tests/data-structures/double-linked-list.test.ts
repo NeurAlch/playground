@@ -1,4 +1,4 @@
-import { DoubleLinkedList } from '../../../data-structures/double-linked-list';
+import { DoubleLinkedList } from '../../data-structures/double-linked-list';
 
 describe('DoubleLinkedList', () => {
   it('should create an instance', () => {

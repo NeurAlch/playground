@@ -1,4 +1,4 @@
-import { SinglyLinkedList } from '../../../data-structures/singly-linked-list';
+import { SinglyLinkedList } from '../../data-structures/singly-linked-list';
 
 describe('SinglyLinkedList', () => {
   it('should create an instance', () => {

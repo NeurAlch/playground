@@ -1,4 +1,4 @@
-import { binarySearch } from '../../../algos/binarySearch';
+import { binarySearch } from '../../algos/binarySearch';
 
 describe('array Big-O time', () => {
   it('returns value at O(1)', () => {

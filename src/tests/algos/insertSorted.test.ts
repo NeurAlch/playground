@@ -1,4 +1,4 @@
-import { insertSorted } from '../../../algos/insertSorted';
+import { insertSorted } from '../../algos/insertSorted';
 
 describe('insertSorted', () => {
   it('should insert a number at the right spot on a sorted array', () => {

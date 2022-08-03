@@ -1,4 +1,4 @@
-import { Deque } from '../../../data-structures/deque';
+import { Deque } from '../../data-structures/deque';
 
 describe('Deque', () => {
   it('should create an instance', () => {
