@@ -53,11 +53,16 @@ From fastest to slowest:
 
 ### Examples
 
-* `O(n + m)`
-  * Example: A function that traverses a list with `n` elements, and a string with `m` characters.
-* `O(n)`
-  * Example: An function that traverses a list with `n` elements, like a `for` loop or `map`.
 * `O(1)`
   * Example: `1 + a[0]` a single operation (expression)
+  * `1 + 5 + 2` we use as `O(1)`
+* `O(n)`
+  * Example: An function that traverses a list with `n` elements, like a `for` loop or `map`.
+  * `O(n+n)` -> we drop one n and say `O(n)`
+* `O(n + m)`
+  * Example: A function that traverses a list with `n` elements, and a string with `m` characters.
+  * Since we have two different variables we can't drop them, and we use `O(n + m)`
+  * If we had `O(n + m + 3)` we would drop the `3` and say `O(n + m)` since `3` is not another dependant input
 * `O(n^2)`
   * Example: A function that creates pairs of numbers from a list. `f([1, 2, 3]) => [[1, 1], [1, 2]..., [2, 1]...]`
+    * `O(n^2 + 2n)` -> we drop the `2n` and keep `n^2` -> `O(n^2)`
