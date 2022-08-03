@@ -1,11 +1,20 @@
 ## Asymptotic Complexity
 
+> Definition of 'asymptotic'
+> 1. of or referring to an asymptote.
+> 2. (of a function, series, formula, etc) approaching a given value or condition,
+> as a variable or an expression containing a variable approaches a limit, usually infinity.
+
+> In mathematical analysis, asymptotic analysis, also known as asymptotics, is a method of describing limiting behavior.
+
 Asymptotic notation describes the behavior of the time or space complexity.
 
 A unit can be an elementary operation.
 
 The *unit terms* of `3n^2 + 6n log n + 7n + 5` are `n^2`, `n log n`, `n`, and `1`. The biggest term is `n^2`,
 so its asymptotic complexity is `O(n^2)`.
+
+In a case like `O(n^4 + n^2)` we would drop `n^2` and keep `n^4`, making it `O(n^4)`.
 
 In `f(n) = O(g(n))` the equal sign means `is` and not `equal`.
 
@@ -35,7 +44,12 @@ From fastest to slowest:
 * Quadratic: `O(n^2)`
 * Cubic: `O(n^3)`
 * Exponential: `O(2^n)`
+  * `2*2*2...*2` -> `n` times
 * Factorial: `O(n!)`
+  * `n*(n-1)*(n-2)...*1` -> `n` times
+  * the factorial of 5 (`5!`) is `5 * 4 * 3 * 2 * 1 = 120`
+
+![Big O Notation](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comparison_computational_complexity.svg/1280px-Comparison_computational_complexity.svg.png)
 
 ### Examples
 
