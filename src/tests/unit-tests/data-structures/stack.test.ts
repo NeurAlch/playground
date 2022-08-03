@@ -19,6 +19,7 @@ describe('Stack', () => {
     stack.push(2);
     expect(stack.peek()).toBe(2);
     expect(stack.length).toBe(2);
+
     expect(stack.pop()).toBe(2);
     expect(stack.peek()).toBe(1);
     expect(stack.length).toBe(1);
