@@ -6,14 +6,14 @@ export const sortedSquaredArray = (array: number[]): number[] => {
   const sortedSquared = Array(array.length).fill(0);
 
   for (let i = array.length - 1; i >= 0; i--) {
-    const absLeft = Math.abs(array[left]);
-    const absRight = Math.abs(array[right]);
+    const leftVal = array[left];
+    const rightVal = array[right];
 
-    if (absLeft > absRight) {
-      sortedSquared[i] = array[left] * array[left];
+    if (Math.abs(leftVal) > Math.abs(rightVal)) {
+      sortedSquared[i] = leftVal * leftVal;
       left++;
-    } else if (absLeft <= absRight) {
-      sortedSquared[i] = array[right] * array[right];
+    } else {
+      sortedSquared[i] = rightVal * rightVal;
       right--;
     }
   }
