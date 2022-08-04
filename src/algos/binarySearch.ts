@@ -1,4 +1,5 @@
 // assume sorted arr
+// O(log n)
 export const binarySearch = (sortedArr: number[], target: number): number => {
   const n = sortedArr.length;
 
