@@ -1,4 +1,5 @@
-// best case O(1), worst case O(n)
+// O(1) space
+// best case O(1) time, worst case O(n) time
 // the numbers in sequence appear in the same order on array, but not necessarily consecutively
 export const isValidSubsequence = (array: number[], sequence: number[]): boolean => {
   if (sequence.length === 0) {

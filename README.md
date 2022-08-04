@@ -19,6 +19,7 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
     * Pointers to go through an array/data structure
     * Sorting before we start
     * Hash maps to store partial results
+    * Insert in reverse order on a new array size n, when creating a sorted array
 * Data Structures
   * [JS Array](src/tests/data-structures/arrays.test.ts) [(big-o)](src/tests/data-structures/array.big-o.test.ts)
     * Sort
