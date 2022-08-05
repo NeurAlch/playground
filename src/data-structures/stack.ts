@@ -5,8 +5,8 @@ export interface IStack<TValue> {
 
   isFull(): boolean;
   isEmpty(): boolean;
-  insert(value: TValue): void;
-  delete(): TValue | undefined;
+  push(value: TValue): void;
+  pop(): TValue | undefined;
   read(): TValue | undefined;
   toArray(): Array<TValue | undefined>;
 }
@@ -22,7 +22,7 @@ export class Stack<TValue> implements IStack<TValue> {
     this._array = createArrayOfSize<TValue | undefined>(maxSize, undefined);
   }
 
-  delete(): TValue | undefined {
+  pop(): TValue | undefined {
     if (this.isEmpty()) {
       throw new Error('Stack is empty');
     }
@@ -43,7 +43,7 @@ export class Stack<TValue> implements IStack<TValue> {
     return this._topPointer + 1;
   }
 
-  insert(value: TValue): void {
+  push(value: TValue): void {
     if (this.isFull()) {
       throw new Error('Stack is full');
     }

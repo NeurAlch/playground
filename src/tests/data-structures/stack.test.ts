@@ -10,19 +10,19 @@ describe('Stack', () => {
 
   it('should push and pop values', () => {
     const stack = new Stack(10);
-    stack.insert(1);
+    stack.push(1);
     expect(stack.length).toBe(1);
-    expect(stack.delete()).toBe(1);
+    expect(stack.pop()).toBe(1);
     expect(stack.length).toBe(0);
-    stack.insert(1);
-    stack.insert(2);
+    stack.push(1);
+    stack.push(2);
     expect(stack.read()).toBe(2);
     expect(stack.length).toBe(2);
 
-    expect(stack.delete()).toBe(2);
+    expect(stack.pop()).toBe(2);
     expect(stack.read()).toBe(1);
     expect(stack.length).toBe(1);
-    expect(stack.delete()).toBe(1);
+    expect(stack.pop()).toBe(1);
     expect(stack.length).toBe(0);
     expect(stack.read()).toBe(undefined);
   });
@@ -30,31 +30,31 @@ describe('Stack', () => {
   it('should throw error for overflow or underflow', () => {
     const stack = new Stack(3);
     expect(stack.isFull()).toBe(false);
-    stack.insert(1);
-    stack.insert(2);
-    stack.insert(3);
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
     expect(stack.isFull()).toBe(true);
     expect(() => {
-      stack.insert(4);
+      stack.push(4);
     }).toThrowError('Stack is full');
     expect(stack.toArray()).toEqual([1, 2, 3]);
     expect(stack.length).toBe(3);
     expect(stack.read()).toBe(3);
-    expect(stack.delete()).toBe(3);
-    stack.insert(3);
+    expect(stack.pop()).toBe(3);
+    stack.push(3);
     expect(() => {
-      stack.insert(4);
+      stack.push(4);
     }).toThrowError('Stack is full');
     expect(stack.length).toBe(3);
     expect(stack.read()).toBe(3);
     expect(stack.isEmpty()).toBe(false);
-    stack.delete();
+    stack.pop();
     expect(stack.toArray()).toEqual([1, 2, undefined]);
-    stack.delete();
-    stack.delete();
+    stack.pop();
+    stack.pop();
     expect(stack.isEmpty()).toBe(true);
     expect(() => {
-      stack.delete();
+      stack.pop();
     }).toThrowError('Stack is empty');
     expect(stack.length).toBe(0);
     expect(stack.read()).toBeUndefined();

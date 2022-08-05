@@ -10,11 +10,7 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
 
 ## Code & Notes
 
-* Math
-  * [Logarithm](./notes/logarithm.md)
-  * [Math Notation & Review](./notes/math-notation.md)
 * [Algorithms](src/tests/algos)
-  * [Asymptotic Analysis (notes)](./notes/asymptotic-complexity.md)
   * Useful concepts for solving problems
     * Pointers to go through an array/data structure
     * Sorting before we start
