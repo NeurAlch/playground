@@ -1,5 +1,5 @@
 import { DoubleLinkedList } from '../../data-structures/double-linked-list';
-import { reverseDoubleLinkedList } from '../../algos/reverse-double-linked-list';
+import { reverseDoubleLinkedList } from '../../algos/reverseDoubleLinkedList';
 
 describe('reverse double linked list', () => {
   it('reverses a double linked list iteratively', () => {

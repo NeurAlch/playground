@@ -1,5 +1,5 @@
 import { SinglyLinkedList } from '../../data-structures/singly-linked-list';
-import { reverseLinkedList, reverseLinkedListRecursive } from '../../algos/reverse-linked-list';
+import { reverseLinkedList, reverseLinkedListRecursive } from '../../algos/reverseLinkedList';
 
 describe('reverse linked list', () => {
   it('reverses a linked list iteratively', () => {

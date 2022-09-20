@@ -1,4 +1,4 @@
-import { reverseTextWithStack } from '../../algos/reverse-text-with-stack';
+import { reverseTextWithStack } from '../../algos/reverseTextWithStack';
 
 describe('reverseTextWithStack', () => {
   it('should reverse text', () => {
