@@ -1,4 +1,4 @@
-import { sortedSquaredArray } from '../../algos/sortedSquaredArray';
+import { sortedSquaredArray } from '../../iq/sortedSquaredArray';
 
 describe('sorted squared array', () => {
   it('should return the correct result', () => {

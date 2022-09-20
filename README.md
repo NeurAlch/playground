@@ -40,6 +40,7 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
   * [Queue using Double Linked List](src/tests/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
+* [Interview Questions](src/tests/iq)
 * Design Patterns
 * Machine Learning
   * [New](./src/ml)

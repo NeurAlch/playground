@@ -1,4 +1,4 @@
-import { tournamentWinner } from '../../algos/tournamentWinner';
+import { tournamentWinner } from '../../iq/tournamentWinner';
 
 describe('tournamentWinner', () => {
   it('returns the winning team', () => {

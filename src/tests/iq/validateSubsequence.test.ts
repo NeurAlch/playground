@@ -1,4 +1,4 @@
-import { isValidSubsequence } from '../../algos/validateSubsequence';
+import { isValidSubsequence } from '../../iq/validateSubsequence';
 
 describe('validate subsequence', () => {
   it('should return true or false if it is a valid subsequence', () => {

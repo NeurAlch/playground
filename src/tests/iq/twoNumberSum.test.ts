@@ -1,4 +1,4 @@
-import { twoNumberSumLoops, twoNumberSumPointers, twoNumberSumHash } from '../../algos/twoNumberSum';
+import { twoNumberSumLoops, twoNumberSumPointers, twoNumberSumHash } from '../../iq/twoNumberSum';
 
 describe('twoNumberSum', () => {
   it('returns the correct values', () => {
