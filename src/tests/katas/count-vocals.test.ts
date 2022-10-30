@@ -1,9 +1,14 @@
 export class Kata {
   static getCount(str: string): number {
-    return str
-      .split('')
-      .map((letter) => (['a', 'e', 'i', 'o', 'u'].includes(letter) ? 1 : 0) as number)
-      .reduce((a, b) => a + b, 0);
+    let count = 0;
+
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === 'a' || str[i] === 'e' || str[i] === 'i' || str[i] === 'o' || str[i] === 'u') {
+        count++;
+      }
+    }
+
+    return count;
   }
 }
 
