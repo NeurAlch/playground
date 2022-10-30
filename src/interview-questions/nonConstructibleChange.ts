@@ -1,11 +1,22 @@
 export const nonConstructibleChange = (coins: number[]): number => {
   let change = 1;
-  for (let i = 0; i < coins.length; i++) {
-    const current = coins[i];
-    if (change + current > change + 1) {
-      return change + 1;
-    }
-    change += current;
+
+  if (coins.length === 0) {
+    return change;
   }
+
+  const sorted = coins.sort((a, b) => a - b);
+
+  if (sorted[0] > 1) {
+    return change;
+  }
+
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i] > change) {
+      return change;
+    }
+    change += sorted[i];
+  }
+
   return change;
 };
