@@ -9,7 +9,7 @@ describe('nonConstructibleChange', () => {
       },
       {
         coins: [1],
-        answer: -1,
+        answer: 2,
       },
       {
         coins: [2],
@@ -37,7 +37,7 @@ describe('nonConstructibleChange', () => {
       },
       {
         coins: [1, 2, 3],
-        answer: -1,
+        answer: 7,
       },
     ];
 
