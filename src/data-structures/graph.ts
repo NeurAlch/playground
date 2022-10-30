@@ -1,6 +1,7 @@
 export interface IGraph<TValue> {
   neighbors(id: string): string[];
   adjacent(a: string, b: string): boolean;
+  addVertex(id: string, value?: TValue): void;
   updateVertex(id: string, value: TValue): void;
   removeVertex(a: string): void;
   addEdge(a: string, b: string): void;
@@ -11,8 +12,8 @@ export interface IGraph<TValue> {
 
 interface IVertex<TValue> {
   id: string;
-  value: TValue;
   edges: string[];
+  value: TValue | undefined;
 }
 
 export class Graph<TValue> implements IGraph<TValue> {
@@ -39,7 +40,11 @@ export class Graph<TValue> implements IGraph<TValue> {
     return vertexX.edges.includes(b);
   }
 
-  updateVertex(id: string, value: TValue): void {
+  addVertex(id: string, value?: TValue) {
+    this.updateVertex(id, value);
+  }
+
+  updateVertex(id: string, value: TValue | undefined): void {
     if (this.vertexes[id]) {
       this.vertexes[id].value = value;
     } else {
@@ -52,49 +57,40 @@ export class Graph<TValue> implements IGraph<TValue> {
   }
 
   removeVertex(a: string): void {
-    if (!this.vertexes[a]) {
-      throw new Error(`Vertex "${a}" does not exist`);
-    }
-
     for (const vertex of Object.keys(this.vertexes)) {
       if (vertex !== a) {
         this.removeEdge(vertex, a);
       }
     }
 
-    delete this.vertexes[a];
+    if (this.vertexes[a]) {
+      delete this.vertexes[a];
+    }
   }
 
   addEdge(a: string, b: string): void {
-    const vertexA = this.vertexes[a];
-    const vertexB = this.vertexes[b];
-
-    if (!vertexA) {
-      throw new Error(`Vertex "${a}" does not exist`);
+    if (!this.vertexes[a]) {
+      this.addVertex(a);
     }
 
-    if (!vertexB) {
-      throw new Error(`Vertex "${b}" does not exist`);
+    if (!this.vertexes[b]) {
+      this.addVertex(b);
     }
 
-    vertexA.edges.push(b);
-    vertexB.edges.push(a);
+    this.vertexes[a].edges.push(b);
+    this.vertexes[b].edges.push(a);
   }
 
   removeEdge(a: string, b: string): void {
     const vertexA = this.vertexes[a];
+    if (vertexA) {
+      vertexA.edges = vertexA.edges.filter((edge) => edge !== b);
+    }
+
     const vertexB = this.vertexes[b];
-
-    if (!vertexA) {
-      throw new Error(`Vertex "${a}" does not exist`);
+    if (vertexB) {
+      vertexB.edges = vertexB.edges.filter((edge) => edge !== a);
     }
-
-    if (!vertexB) {
-      throw new Error(`Vertex "${b}" does not exist`);
-    }
-
-    vertexA.edges = vertexA.edges.filter((edge) => edge !== b);
-    vertexB.edges = vertexB.edges.filter((edge) => edge !== a);
   }
 
   getVertexValue(a: string): TValue | undefined {

@@ -5,13 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "dev:server": "ts-node-dev src/index.ts",
-    "dev:parcel": "parcel watch src/html/*.html --dist-dir public/ --port 1234 --public-url /public",
     "script": "ts-node --"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PabloRosales/playground.git"
   },
   "author": "Pablo Rosales <me@pablorosales.xyz>",
   "license": "MIT",
