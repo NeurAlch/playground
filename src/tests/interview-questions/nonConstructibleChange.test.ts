@@ -55,5 +55,6 @@ describe('nonConstructibleChange', () => {
     expect(nonConstructibleChange(cases[7].coins)).toBe(cases[7].answer);
     expect(nonConstructibleChange(cases[8].coins)).toBe(cases[8].answer);
     expect(nonConstructibleChange(cases[9].coins)).toBe(cases[9].answer);
+    expect(cases.length).toBe(10);
   });
 });
