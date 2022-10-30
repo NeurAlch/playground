@@ -42,6 +42,7 @@ Code is done in TypeScript using TDD.
       * Faster than using a JS Array or an SLL
   * [Graph](src/tests/data-structures/graph.test.ts)
 * [Interview Questions](src/tests/interview-questions)
+  * See the history of the file to see the different solutions (or partial solutions) I've tried
 * Design Patterns
 * Math
 * TypeScript
