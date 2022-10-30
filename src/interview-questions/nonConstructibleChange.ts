@@ -18,5 +18,5 @@ export const nonConstructibleChange = (coins: number[]): number => {
     change += sorted[i];
   }
 
-  return change;
+  return -1;
 };
