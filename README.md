@@ -45,5 +45,5 @@ Code is done in TypeScript using TDD.
 * Design Patterns
 * Math
 * TypeScript
-* [Archive](./archive)
-  * Includes some AI/ML stuff, JS, data structures, math, and SEO python notebooks
+* [Archive](https://github.com/PabloRosales/playground/tree/a34ae4ab7b077816caeb972e93844c05bb6f2ef8/archive/pre-2022)
+  * Includes old code for some AI/ML, JS, data structures, math, and SEO python notebooks
