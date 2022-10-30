@@ -1,4 +1,4 @@
-import { Tree } from '../../data-structures/tree';
+import { Tree } from './tree';
 
 describe('tree', () => {
   it('should create a tree', () => {

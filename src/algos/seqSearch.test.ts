@@ -1,4 +1,4 @@
-import { seqSearch } from '../../algos/seqSearch';
+import { seqSearch } from './seqSearch';
 
 describe('seqSearch', () => {
   it('returns -1 if target is not found', () => {

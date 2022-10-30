@@ -1,4 +1,4 @@
-import { isValidSubsequence } from '../../interview-questions/validateSubsequence';
+import { isValidSubsequence } from './validateSubsequence';
 
 describe('validate subsequence', () => {
   it('should return true or false if it is a valid subsequence', () => {

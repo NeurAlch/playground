@@ -1,4 +1,4 @@
-import { Stack } from '../../data-structures/stack';
+import { Stack } from './stack';
 
 describe('Stack', () => {
   it('should create an instance', () => {

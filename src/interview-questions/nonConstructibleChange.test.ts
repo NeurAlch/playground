@@ -1,4 +1,4 @@
-import { nonConstructibleChange } from '../../interview-questions/nonConstructibleChange';
+import { nonConstructibleChange } from './nonConstructibleChange';
 
 describe('nonConstructibleChange', () => {
   it('returns the minimum amount of change that cannot be created', () => {

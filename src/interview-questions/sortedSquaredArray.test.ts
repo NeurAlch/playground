@@ -1,4 +1,4 @@
-import { sortedSquaredArray } from '../../interview-questions/sortedSquaredArray';
+import { sortedSquaredArray } from './sortedSquaredArray';
 
 describe('sorted squared array', () => {
   it('should return the correct result', () => {

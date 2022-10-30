@@ -1,4 +1,4 @@
-import { binarySearch } from '../../algos/binarySearch';
+import { binarySearch } from './binarySearch';
 
 describe('binarySearch', () => {
   it('finds the value', () => {

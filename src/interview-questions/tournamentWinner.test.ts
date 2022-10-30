@@ -1,4 +1,4 @@
-import { tournamentWinner } from '../../interview-questions/tournamentWinner';
+import { tournamentWinner } from './tournamentWinner';
 
 describe('tournamentWinner', () => {
   it('returns the winning team', () => {

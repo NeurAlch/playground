@@ -1,4 +1,4 @@
-import { Queue } from '../../data-structures/queue';
+import { Queue } from './queue';
 
 describe('Queue', () => {
   it('should create an instance', () => {

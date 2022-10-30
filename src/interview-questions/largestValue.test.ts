@@ -1,4 +1,4 @@
-import { largestValueCompare, largestValueLoop, largestValueBuiltin } from '../../interview-questions/largestValue';
+import { largestValueBuiltin, largestValueCompare, largestValueLoop } from './largestValue';
 
 const ONE_VALUE = [1];
 const ZERO_VALUE = [0];

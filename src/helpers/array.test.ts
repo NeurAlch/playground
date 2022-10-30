@@ -1,4 +1,4 @@
-import { createArrayOfSize } from '../../helpers/array';
+import { createArrayOfSize } from './array';
 
 describe('array helpers', () => {
   it('createArrayOfSize', () => {

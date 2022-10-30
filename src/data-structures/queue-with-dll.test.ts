@@ -1,4 +1,4 @@
-import { QueueWithDoubleLinkedList } from '../../data-structures/queue-with-dll';
+import { QueueWithDoubleLinkedList } from './queue-with-dll';
 
 type TaskType = 'wake-up' | 'breakfast' | 'work' | 'lunch' | 'dinner' | 'sleep';
 

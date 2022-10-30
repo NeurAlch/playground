@@ -1,4 +1,4 @@
-import { CSR, sparseMatrixFromCSR, sparseMatrixToCSR } from '../../algos/sparseMatrix';
+import { CSR, sparseMatrixFromCSR, sparseMatrixToCSR } from './sparseMatrix';
 
 interface Sample {
   to: CSR;

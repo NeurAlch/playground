@@ -1,4 +1,4 @@
-import { twoNumberSumLoops, twoNumberSumPointers, twoNumberSumHash } from '../../interview-questions/twoNumberSum';
+import { twoNumberSumHash, twoNumberSumLoops, twoNumberSumPointers } from './twoNumberSum';
 
 describe('twoNumberSum', () => {
   it('returns the correct values', () => {
