@@ -10,14 +10,14 @@ Code is done in TypeScript. Includes tests.
 
 ## Code & Notes
 
-* [Algorithms](src/tests/algos)
+* [Algorithms](src/algos)
   * Useful concepts for solving problems
     * Pointers to go through an array/data structure
     * Sorting before we start
     * Hash maps to store partial results
     * Insert in reverse order on a new array size n, when creating a sorted array
 * Data Structures
-  * [JS Array](src/tests/data-structures/arrays.test.ts) [(big-o)](src/tests/data-structures/array.big-o.test.ts)
+  * [JS Array](src/data-structures/arrays.test.ts) [(big-o)](src/data-structures/array.big-o.test.ts)
     * Sort
       * Without a sort function it will convert elements into strings, 80 comes before 9
       * The sorting algorithm is stable
@@ -29,18 +29,18 @@ Code is done in TypeScript. Includes tests.
           *  === 0	keep original order of a and b
         * `const compare = (a, b) => a > b ? -1 : 0;`
           * Will have different results in V8 and SpiderMonkey
-  * [JS Map](src/tests/data-structures/map.test.ts)
-  * [JS Set](src/tests/data-structures/set.test.ts)
-  * [Stack using Array](src/tests/data-structures/stack.test.ts)
-  * [Singly Linked List](src/tests/data-structures/singly-linked-list.test.ts)
+  * [JS Map](src/data-structures/map.test.ts)
+  * [JS Set](src/data-structures/set.test.ts)
+  * [Stack using Array](src/data-structures/stack.test.ts)
+  * [Singly Linked List](src/data-structures/singly-linked-list.test.ts)
     * Benefits of a sorted list are lost on a sorted SLL
-  * [Double Linked List](src/tests/data-structures/double-linked-list.test.ts)
+  * [Double Linked List](src/data-structures/double-linked-list.test.ts)
     * Each node can be anywhere in memory, no need to resize an array
     * We don't need to shift position of elements when inserting or deleting like in an array
-  * [Queue using Double Linked List](src/tests/data-structures/queue-with-dll.test.ts)
+  * [Queue using Double Linked List](src/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
-  * [Graph](src/tests/data-structures/undirected-graph.test.ts)
+  * [Graph](src/data-structures/undirected-graph.test.ts)
     * non-linear data structure
     * abstract model of a network
     * nodes (vertices) connected by edges (can be directed or undirected)
@@ -66,7 +66,7 @@ Code is done in TypeScript. Includes tests.
       * can be implemented as a hash table of linked lists
     * can be represented with an incidence matrix
       * usually to save space and memory when there are more edges than vertices
-* [Interview Questions](src/tests/interview-questions)
+* [Interview Questions](src/interview-questions)
   * See the history of the file to see the different solutions (or partial solutions) I've tried
 * Design Patterns
 * Math
