@@ -1,4 +1,4 @@
-import { UndirectedGraph } from '../../data-structures/undirectedGraph';
+import { UndirectedGraph } from '../../data-structures/UndirectedGraph';
 
 describe('UndirectedGraph', () => {
   it('should create graph', () => {
