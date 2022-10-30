@@ -4,7 +4,7 @@
 
 A playground for things I'm learning/practicing.
 
-Code is done in TypeScript using TDD.
+Code is done in TypeScript. Includes tests.
 
 ![Screenshot](./screenshot.png)
 
