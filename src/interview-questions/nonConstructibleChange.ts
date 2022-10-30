@@ -1,3 +1,4 @@
+// time = O(n log n), space = O(1)
 export const nonConstructibleChange = (coins: number[]): number => {
   coins = coins.sort((a, b) => a - b);
 
