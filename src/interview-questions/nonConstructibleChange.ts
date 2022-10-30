@@ -11,6 +11,7 @@ export const nonConstructibleChange = (coins: number[]): number => {
     return change;
   }
 
+  // change + 1 is implied since we started change at 1
   for (let i = 0; i < sorted.length; i++) {
     if (sorted[i] > change) {
       return change;
