@@ -40,7 +40,32 @@ Code is done in TypeScript using TDD.
   * [Queue using Double Linked List](src/tests/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
-  * [Graph](src/tests/data-structures/graph.test.ts)
+  * [Graph](src/tests/data-structures/undirected-graph.test.ts)
+    * non-linear data structure
+    * abstract model of a network
+    * nodes (vertices) connected by edges (can be directed or undirected)
+    * vertices connected by an edge are called adjacent vertices
+    * a degree of a vertex consists of the number of adjacent vertices
+    * a path is a sequence of consecutive adjacent vertices
+      * a simple path does not contain repeated vertices
+      * a cycle is a simple path, except for the last vertex
+    * a graph is acyclic if it does not have cycles
+    * a graph is connected if there is a path between every pair of vertices
+    * can be undirected, where edges do not have a direction
+    * can be directed (digraph), where edges have a direction
+    * is strongly connected if there is a path in both directions between every pair of vertices
+    * can be weighted, where edges have a value or unweighted, where edges have no value
+    * can be represented as adjacency matrix
+      * when not strongly connected, the matrix is sparse (sparse graph) with many 0s
+      * not flexible (number of vertices is fixed)
+      * wastes space (O(n^2))
+    * can be represented as an adjacency list (we are using this one)
+      * flexible (number of vertices is not fixed)
+      * uses less space (O(n + m))
+      * can be implemented as an array of linked lists
+      * can be implemented as a hash table of linked lists
+    * can be represented with an incidence matrix
+      * usually to save space and memory when there are more edges than vertices
 * [Interview Questions](src/tests/interview-questions)
   * See the history of the file to see the different solutions (or partial solutions) I've tried
 * Design Patterns
