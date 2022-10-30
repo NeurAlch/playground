@@ -1,10 +1,10 @@
-# playground
+# Playground
 
 ![tests](https://github.com/PabloRosales/playground/actions/workflows/node.js.yml/badge.svg)
 
 A playground for things I'm learning/practicing.
 
-Most code in TypeScript is done mostly using TDD. Python is done mostly with Jupyter notebooks.
+Code is done in TypeScript using TDD.
 
 ![Screenshot](./screenshot.png)
 
@@ -40,13 +40,10 @@ Most code in TypeScript is done mostly using TDD. Python is done mostly with Jup
   * [Queue using Double Linked List](src/tests/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
-* [Interview Questions](src/tests/iq)
+  * [Graph](src/tests/data-structures/graph.test.ts)
+* [Interview Questions](src/tests/interview-questions)
 * Design Patterns
-* Machine Learning
-  * [New](./src/ml)
 * Math
 * TypeScript
-* Python
-  * [SEO Jupyter notebooks](archive/pre-2022/seo/notebooks)
-* Archive
-  * [Old](./archive)
+* [Archive](./archive)
+  * Includes some AI/ML stuff, JS, data structures, math, and SEO python notebooks
