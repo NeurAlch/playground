@@ -5,6 +5,7 @@ describe('Stack', () => {
     const stack = new Stack(10);
     expect(stack).toBeInstanceOf(Stack);
     expect(stack.length).toBe(0);
+    expect(stack.toArray().length).toBe(0);
     expect(stack.read()).toBeUndefined();
   });
 
@@ -25,6 +26,22 @@ describe('Stack', () => {
     expect(stack.pop()).toBe(1);
     expect(stack.length).toBe(0);
     expect(stack.read()).toBe(undefined);
+  });
+
+  it('should peek', () => {
+    const stack = new Stack(3);
+    expect(stack.peek()).toBeUndefined();
+    stack.push(1);
+    stack.push(2);
+    expect(stack.peek()).toBe(2);
+    stack.pop();
+    expect(stack.peek()).toBe(1);
+    stack.pop();
+    expect(stack.peek()).toBeUndefined();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    expect(stack.peek()).toBe(3);
   });
 
   it('should throw error for overflow or underflow', () => {

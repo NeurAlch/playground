@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "script": "ts-node --"
   },
   "author": "Pablo Rosales <me@pablorosales.xyz>",

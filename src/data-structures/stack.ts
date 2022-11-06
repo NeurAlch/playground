@@ -1,5 +1,3 @@
-import { createArrayOfSize } from '../helpers/array';
-
 export interface IStack<TValue> {
   length: number;
 
@@ -8,6 +6,7 @@ export interface IStack<TValue> {
   push(value: TValue): void;
   pop(): TValue | undefined;
   read(): TValue | undefined;
+  peek(): TValue | undefined;
   toArray(): Array<TValue | undefined>;
 }
 
@@ -19,7 +18,15 @@ export class Stack<TValue> implements IStack<TValue> {
   constructor(maxSize: number) {
     this._topPointer = -1;
     this._maxSize = maxSize;
-    this._array = createArrayOfSize<TValue | undefined>(maxSize, undefined);
+    this._array = [];
+  }
+
+  peek(): TValue | undefined {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+
+    return this._array[this._topPointer];
   }
 
   pop(): TValue | undefined {
