@@ -9,16 +9,16 @@ describe('UndirectedGraph', () => {
 
   it('should add vertex', () => {
     const graph = new UndirectedGraph<number>();
-    expect(() => graph.addVertex('A')).not.toThrow();
+    expect(() => graph.addVertex('A', 1)).not.toThrow();
     expect(graph.isEmpy()).toBe(false);
-    expect(graph.getVertexValue('A')).toBeUndefined();
+    expect(graph.getVertexValue('A')).toBe(1);
     expect(graph.neighbors('A')).toEqual([]);
   });
 
   it('should throw when adding an existing vertex', () => {
     const graph = new UndirectedGraph<number>();
-    graph.addVertex('A');
-    expect(() => graph.addVertex('A')).toThrowError('Vertex with id A already exists');
+    graph.addVertex('A', 1);
+    expect(() => graph.addVertex('A', 1)).toThrowError('Vertex with id A already exists');
   });
 
   it('should update vertex', () => {
@@ -36,8 +36,8 @@ describe('UndirectedGraph', () => {
 
   it('should add edge', () => {
     const graph = new UndirectedGraph<number>();
-    graph.addVertex('A');
-    graph.addVertex('B');
+    graph.addVertex('A', 1);
+    graph.addVertex('B', 2);
     expect(() => graph.addEdge('A', 'B')).not.toThrow();
     expect(graph.adjacent('A', 'B')).toBe(true);
     expect(graph.adjacent('B', 'A')).toBe(true);
@@ -48,14 +48,14 @@ describe('UndirectedGraph', () => {
   it('should throw when adding an edge to a non-existing vertex', () => {
     const graph = new UndirectedGraph<number>();
     expect(() => graph.addEdge('A', 'B')).toThrowError('Vertex with id A does not exist');
-    graph.addVertex('A');
+    graph.addVertex('A', 1);
     expect(() => graph.addEdge('A', 'B')).toThrowError('Vertex with id B does not exist');
   });
 
   it('should remove edge', () => {
     const graph = new UndirectedGraph<number>();
-    graph.addVertex('A');
-    graph.addVertex('B');
+    graph.addVertex('A', 1);
+    graph.addVertex('B', 1);
     graph.addEdge('A', 'B');
     expect(() => graph.removeEdge('A', 'B')).not.toThrow();
     expect(graph.adjacent('A', 'B')).toBe(false);
@@ -66,15 +66,15 @@ describe('UndirectedGraph', () => {
 
   it('should remove vertex', () => {
     const graph = new UndirectedGraph<number>();
-    graph.addVertex('A');
+    graph.addVertex('A', 1);
     expect(() => graph.removeVertex('A')).not.toThrow();
     expect(graph.isEmpy()).toBe(true);
   });
 
   it('should remove edges when removing vertex', () => {
     const graph = new UndirectedGraph<number>();
-    graph.addVertex('A');
-    graph.addVertex('B');
+    graph.addVertex('A', 1);
+    graph.addVertex('B', 1);
     graph.addEdge('A', 'B');
     graph.removeVertex('A');
     expect(() => graph.adjacent('A', 'B')).toThrowError('Vertex with id A does not exist');

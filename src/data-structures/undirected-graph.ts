@@ -13,7 +13,7 @@ export interface IGraph<TValue> {
 interface IVertex<TValue> {
   id: string;
   edges: string[];
-  value: TValue | undefined;
+  value: TValue;
 }
 
 export class UndirectedGraph<TValue> implements IGraph<TValue> {
@@ -46,7 +46,7 @@ export class UndirectedGraph<TValue> implements IGraph<TValue> {
     return vertexX.edges.includes(b);
   }
 
-  addVertex(id: string, value?: TValue) {
+  addVertex(id: string, value: TValue) {
     if (this.adjacencyList[id]) {
       throw new Error(`Vertex with id ${id} already exists`);
     }
@@ -58,7 +58,7 @@ export class UndirectedGraph<TValue> implements IGraph<TValue> {
     };
   }
 
-  updateVertex(id: string, value: TValue | undefined): void {
+  updateVertex(id: string, value: TValue): void {
     if (!this.adjacencyList[id]) {
       throw new Error(`Vertex with id ${id} does not exist`);
     }
