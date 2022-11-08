@@ -1,4 +1,4 @@
-import { UndirectedGraph } from './UndirectedGraph';
+import { UndirectedGraph } from './undirected-graph';
 
 describe('UndirectedGraph', () => {
   it('should create graph', () => {
