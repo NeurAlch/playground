@@ -8,7 +8,7 @@ Code is done in TypeScript. Includes tests.
 
 ![Screenshot](./screenshot.png)
 
-## Code & Notes
+## Table of contents
 
 * [Algorithms](src/algos)
   * Useful concepts for solving problems
@@ -40,6 +40,8 @@ Code is done in TypeScript. Includes tests.
   * [Queue using Double Linked List](src/data-structures/queue-with-dll.test.ts)
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
+  * [Tree](src/data-structures/tree.test.ts)
+    * TBD
   * [Graph](src/data-structures/undirected-graph.test.ts)
     * non-linear data structure
     * abstract model of a network
