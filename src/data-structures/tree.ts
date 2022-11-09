@@ -1,12 +1,19 @@
+// TODO: finish implementation
+
+type Atom<TValue> = [string, TValue];
+interface TValueArray<TValue> extends Array<TValueArray<TValue> | Atom<TValue>> {}
+
 interface ITreeNode<TValue> {
   id: string;
   value: TValue;
-  toArray(): TValue[];
+  addNode: (newId: string, value: TValue) => void;
+  toArray(): TValueArray<TValue>;
 }
 
 interface ITree<TValue> {
-  toArray(): TValue[];
-  remove(value: TValue): void;
+  degree: number;
+  addNode(targetId: string, newId: string, value: TValue): void;
+  toArray(): TValueArray<TValue>;
 }
 
 export class TreeNode<TValue> implements ITreeNode<TValue> {
@@ -28,8 +35,23 @@ export class TreeNode<TValue> implements ITreeNode<TValue> {
     return this._id;
   }
 
-  public toArray(): TValue[] {
-    return [];
+  public addNode(newId: string, value: TValue): void {
+    this._edges.push(new TreeNode<TValue>(newId, value));
+  }
+
+  public toArray(): TValueArray<TValue> {
+    const arr: TValueArray<TValue> = [];
+
+    if (this._edges.length === 0) {
+      arr.push([this.id, this.value]);
+      return arr;
+    }
+
+    for (const edge of this._edges) {
+      arr.push(edge.toArray());
+    }
+
+    return arr;
   }
 }
 
@@ -40,11 +62,15 @@ export class Tree<TValue> implements ITree<TValue> {
     this.root = new TreeNode<TValue>(rootId, rootValue);
   }
 
-  public remove(value: TValue) {
-    value;
+  public toArray(): TValueArray<TValue> {
+    return this.root.toArray();
   }
 
-  public toArray(): TValue[] {
-    return this.root.toArray();
+  public addNode(targetId: string, newId: string, value: TValue): void {
+    this.root.addNode(newId, value);
+  }
+
+  public get degree(): number {
+    return 0;
   }
 }

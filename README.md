@@ -41,7 +41,22 @@ Code is done in TypeScript. Includes tests.
     * Using a DLL allows us to do operations O(1) for enqueue and dequeue
       * Faster than using a JS Array or an SLL
   * [Tree](src/data-structures/tree.test.ts)
-    * TBD
+    * root node, first unique node where all node descend from
+      * the root node is at level 0
+      * the children of that node are at level 1, etc
+    * a subtree is a tree whose nodes descend from some other tree
+    * degree is the total number of children of a given node (degree of that node)
+      * a tree with only one node has degree of 0
+    * leaf node is one that does not have any children and is the terminal node of a given tree
+      * the degree of a leaf node is always 0
+    * edge is the connection between any given two nodes in a tree
+      * the total number of edges on a given tree will always be a maximum of one less than the
+        total nodes in the tree
+    * a node with a subtree is the parent of that subtree
+    * child is a descendant from a parent node
+    * sibling is one of the nodes with the same parent
+    * the height of a tree is the total number of nodes in the longest path of the tree
+    * the depth of a node is the number of edges from the root to the node
   * [Graph](src/data-structures/undirected-graph.test.ts)
     * non-linear data structure
     * abstract model of a network
