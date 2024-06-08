@@ -1,7 +1,7 @@
 // TODO: finish implementation
 
 type Atom<TValue> = [string, TValue];
-interface TValueArray<TValue> extends Array<TValueArray<TValue> | Atom<TValue>> {}
+export interface TValueArray<TValue> extends Array<TValueArray<TValue> | Atom<TValue>> {}
 
 interface ITreeNode<TValue> {
   id: string;
@@ -56,7 +56,7 @@ export class TreeNode<TValue> implements ITreeNode<TValue> {
 }
 
 export class Tree<TValue> implements ITree<TValue> {
-  private root: TreeNode<TValue>;
+  protected root: TreeNode<TValue>;
 
   constructor(rootId: string, rootValue: TValue) {
     this.root = new TreeNode<TValue>(rootId, rootValue);
